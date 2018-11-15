@@ -1,11 +1,12 @@
 "use strict";
 
 //Принимаем число от пользователя
-let num = prompt("Введите число", ""),
-		numLength = num.length,
-
+let num = 33721,
+		numLength = num.toString().length,
 		summ = 1;
 
+//
+alert("Значение переменной равно: " + num);
 //Создаём цикл, находящий произведение цифр вводимого числа
 for( let i = 1; i <= numLength; i++) {
 
