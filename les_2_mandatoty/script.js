@@ -29,7 +29,7 @@ for (i; i < 2; i++) {
 				alert('Некорректный ввод данных, повторите попытку!');
 				costs = prompt("Введите обязательную статью расходов в этом месяце", ""),
 				price = +prompt("Во сколько обойдется?", "");
-			} while (typeof (costs) !== 'string' && typeof (costs) == null && typeof (price) == null && costs == "" && price == 0 && costs.length > 50);
+			} while (typeof (costs) !== 'string' || typeof (costs) == null || typeof (price) == null || costs == "" || price == 0 || costs.length > 50);
 			appData.expenses[costs] = price;
 		}
 }
@@ -108,25 +108,25 @@ appData.moneyPerDay = resultOut;
 alert("Ваш суточный бюджет составляет: " + appData.moneyPerDay);
 
 //Почему то не работает
-/* switch (resultOut) {
-	case resultOut < 0:
+switch (true) {
+	case appData.moneyPerDay < 0:
 		alert('Вы в долгах :-(');
 		break;
-	case resultOut < 100:
+	case appData.moneyPerDay < 100:
 		alert('Минимальный уровень достатка');
 		break;
-	case resultOut > 100 && resultOut < 2000:
+	case appData.moneyPerDay > 100 && appData.moneyPerDay < 2000:
 		alert('Средний уровень достатка');
 		break;
-	case resultOut > 2000:
+	case appData.moneyPerDay > 2000:
 		alert('Высокий уровень достатка');
 		break;
 	default:
 		alert('Непредвиденная ошибка');
 		break;
-} */
+}
 
-//Рабочий вариант
+/* //Рабочий вариант
 if (appData.moneyPerDay < 0) {
 	alert('Вы в долгах :-(');
 } else if (appData.moneyPerDay < 100) {
@@ -137,4 +137,4 @@ if (appData.moneyPerDay < 0) {
 	alert('Высокий уровень достатка');
 } else {
 	alert('Непредвиденная ошибка');
-}
+} */

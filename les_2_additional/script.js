@@ -11,8 +11,8 @@ let week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 
 		if (i == 5 || i == 6) {
 			document.write('<br>' + '<b>' + week[i] + '</b>');
 			continue;
-		} else if (i == 4) {
-			document.write('<br>' + '<i>' + week[i] + '</i>');
+		} else if (week[i] == toDay) {
+			document.write('<br>' + '<i>' + toDay + '</i>');
 			continue;
 		}
 		document.write( '<br>' + week[i]);
