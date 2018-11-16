@@ -18,7 +18,7 @@ let appData = {
 	saving: false
 };	
 
-for (let i; i < 2; i++) {
+for (let i = 0; i < 2; i++) {
 	let costs = prompt("Введите обязательную статью расходов в этом месяце", ""),
 			price = +prompt("Во сколько обойдется?", "");
 		if (typeof (costs) === 'string' && typeof (costs) != null && typeof(price) != null && costs != "" && price != 0 && costs.length <50) {
