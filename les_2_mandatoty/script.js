@@ -2,8 +2,7 @@
 
 //Создаём начальные переменные
 let money = +prompt("Ваш бюджет на месяц?", ""),
-		time = prompt("Введите дату в формате YYYY-MM-DD", ""),
-		i = 0;
+		time = prompt("Введите дату в формате YYYY-MM-DD", "");
 
 //Исходные данные в объекте
 let appData = {
@@ -19,7 +18,7 @@ let appData = {
 	saving: false
 };	
 
-for (i; i < 2; i++) {
+for (let i; i < 2; i++) {
 	let costs = prompt("Введите обязательную статью расходов в этом месяце", ""),
 			price = +prompt("Во сколько обойдется?", "");
 		if (typeof (costs) === 'string' && typeof (costs) != null && typeof(price) != null && costs != "" && price != 0 && costs.length <50) {
@@ -109,13 +108,13 @@ alert("Ваш суточный бюджет составляет: " + appData.mo
 
 //Почему то не работает
 switch (true) {
-	case appData.moneyPerDay < 0:
+	case appData.moneyPerDay <= 0:
 		alert('Вы в долгах :-(');
 		break;
-	case appData.moneyPerDay < 100:
+	case appData.moneyPerDay <= 100:
 		alert('Минимальный уровень достатка');
 		break;
-	case appData.moneyPerDay > 100 && appData.moneyPerDay < 2000:
+	case appData.moneyPerDay > 100 && appData.moneyPerDay <= 2000:
 		alert('Средний уровень достатка');
 		break;
 	case appData.moneyPerDay > 2000:
