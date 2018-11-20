@@ -90,7 +90,7 @@ let appData = {
 		}
 	}
 };	
-
+appData.chooseIncome();
 
 
 //Другой способ с помощью цикла for
