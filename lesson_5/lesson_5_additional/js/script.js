@@ -44,14 +44,26 @@ function dayWeek(date) {
 let date = new Date();
 alert("Сегодня " + dayWeek(date));
 
+
 //Разница между датами
-let date1 = new Date(2018, 0 , 1);
-let date2 = new Date(2018, 0 , 10);
-let daysLag = Math.ceil(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 3600 * 24));
-let input = document.querySelector('#first_date');
-let output = document.querySelector('.difference');
-input.addEventListener('input', (event) => {
-	output.innerHTML = event.target.value;
-	console.log(output.innerHTML = event.target.value);
+let	input_1 = document.querySelectorAll('.day_date')[0],
+		input_2 = document.querySelectorAll('.day_date')[1],
+		output = document.querySelector('.difference'),
+		date1 = new Date(input_1.value),
+		date2 = new Date(input_2.value),
+		daysLag = Math.ceil(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 3600 * 24));
+
+	output.innerHTML = "Разница между датами: <br> " + daysLag + " дня (дней)";
+
+input_1.addEventListener('input', function () {
+	let changeInp = input_1.value;
+	date1 = new Date(changeInp);
+	daysLag = Math.ceil(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 3600 * 24));
+	output.innerHTML = "Разница между датами: <br> " + daysLag + " дня (дней)";
 }, true);
-console.log(daysLag);
+input_2.addEventListener('input', function () {
+	let changeInp = input_2.value;
+	date2 = new Date(changeInp);
+	daysLag = Math.ceil(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 3600 * 24));
+	output.innerHTML = "Разница между датами: <br> " + daysLag + " дня (дней)";
+}, true);
