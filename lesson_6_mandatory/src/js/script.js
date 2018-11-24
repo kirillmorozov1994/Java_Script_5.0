@@ -86,15 +86,20 @@ btnState_1.addEventListener('click', function () {
 
 ////Нажатие на 2 кнопку "Утвержить"
 btnState_2.addEventListener('click', function () {
+	optionalExpenses.textContent = '';
 		if (optionalItem[0].value || optionalItem[1].value || optionalItem[2].value) {
-			event.target.disable = true;
+			btnState_2.disable = false;
 			for (let i = 0; i < optionalItem.length; i++) {
 				let bindingExpenses = optionalItem[i].value;
-				appData.optionalExpenses[i] = bindingExpenses;
-				optionalExpenses.textContent += appData.optionalExpenses[i] + ' ';
+				if (bindingExpenses == "") {
+					continue;
+				} else {
+					appData.optionalExpenses[i] = bindingExpenses;
+					optionalExpenses.textContent += appData.optionalExpenses[i] + ' ';
+				}
 			}
 		} else {
-			event.target.disable = false;
+			event.target.disable = true;
 			alert("Заполните хотя бы одно поле необязательных расходов!");
 		}
 });
