@@ -2,31 +2,30 @@
 
 //Находим все необходимые DOM элементы
 let btn = document.getElementById('start'),
-	budget = document.getElementsByClassName('budget-value')[0],
-	dayBudget = document.getElementsByClassName('daybudget-value')[0],
-	level = document.getElementsByClassName('level-value')[0],
-	expenses = document.getElementsByClassName('expenses-value')[0],
-	optionalExpenses = document.getElementsByClassName('optionalexpenses-value')[0],
-	income = document.getElementsByClassName('income-value')[0],
-	monthSavings = document.getElementsByClassName('monthsavings-value')[0],
-	yearSavings = document.getElementsByClassName('yearsavings-value')[0],
-	expensesItem = document.getElementsByClassName('expenses-item'),
-	btnState_1 = document.getElementsByTagName('button')[0],
-	btnState_2 = document.getElementsByTagName('button')[1],
-	btnCalc = document.getElementsByTagName('button')[2],
-	optionalItem = document.querySelectorAll('.optionalexpenses-item'),
-	chooseIncome = document.querySelector('.choose-income'),
-	chooseSumm = document.querySelector('.choose-sum'),
-	choosePercent = document.querySelector('.choose-percent'),
-	saving = document.querySelector('#savings'),
-	year = document.querySelector('.year-value'),
-	month = document.querySelector('.month-value'),
-	day = document.querySelector('.day-value');
+		budget = document.getElementsByClassName('budget-value')[0],
+		dayBudget = document.getElementsByClassName('daybudget-value')[0],
+		level = document.getElementsByClassName('level-value')[0],
+		expenses = document.getElementsByClassName('expenses-value')[0],
+		optionalExpenses = document.getElementsByClassName('optionalexpenses-value')[0],
+		income = document.getElementsByClassName('income-value')[0],
+		monthSavings = document.getElementsByClassName('monthsavings-value')[0],
+		yearSavings = document.getElementsByClassName('yearsavings-value')[0],
+		expensesItem = document.getElementsByClassName('expenses-item'),
+		btnState_1 = document.getElementsByTagName('button')[0],
+		btnState_2 = document.getElementsByTagName('button')[1],
+		btnCalc = document.getElementsByTagName('button')[2],
+		optionalItem = document.querySelectorAll('.optionalexpenses-item'),
+		chooseIncome = document.querySelector('.choose-income'),
+		chooseSumm = document.querySelector('.choose-sum'),
+		choosePercent = document.querySelector('.choose-percent'),
+		saving = document.querySelector('#savings'),
+		year = document.querySelector('.year-value'),
+		month = document.querySelector('.month-value'),
+		day = document.querySelector('.day-value');
 
 
 //Создаём начальные переменные
 let money, time;
-
 
 
 //Нажатие на кнопку "Начать расчёт"
@@ -46,28 +45,24 @@ btn.addEventListener('click', function () {
 	day.value = new Date(Date.parse(time)).getDate();
 });
 
+
 //Нажатие на 1 кнопку "Утвердить"
 let summ = 0;
 btnState_1.addEventListener('click', function () {
 		if (expensesItem[0].value && expensesItem[1].value || expensesItem[2].value && expensesItem[3].value) {
-			event.target.disable = false;
 				for (let i = 0; i < expensesItem.length; i++) {
 					let a = expensesItem[i].value,
-						b = +expensesItem[++i].value;
+							b = +expensesItem[++i].value;
 
-					if (typeof (a) === 'string' && typeof (a) != null && typeof (b) != null && a != "" && b != 0 && a.length < 50) {
 						appData.expenses[a] = b;
 						summ += b;
-					} else {
-						i = i - 1;
-					}
 				}
 				expenses.textContent = summ;
-		} else {
-			event.target.disable = true;
-			alert("Заполните поля обязательных расходов!");
-			}
+				btnCalc.disable = false;
+				btnCalc.style.filter = 'brightness(1)';
+		}
 });
+
 
 ////Нажатие на 2 кнопку "Утвержить"
 btnState_2.addEventListener('click', function () {
@@ -84,34 +79,112 @@ btnState_2.addEventListener('click', function () {
 		}
 });
 
+
 //Ввод букв в необязательные расходы
-optionalItem[0].onkeyup = function (event) {
-		let bindingExpenses = optionalItem[0].value;
-		let patternName = /[^а-яА-ЯёЁ]/i;
+optionalItem[0].onkeypress = function (event) {
+		let bindingExpenses = event.key;
+		let patternName = /[^а-яА-ЯёЁ]/g;
+		console.log(bindingExpenses);
 		if (patternName.test(bindingExpenses)) {
-			event.target.value = "";
-			return;
+			return false;
 		}
 };
 
-optionalItem[1].onkeyup = function (event) {
-	let bindingExpenses = optionalItem[1].value;
-	let patternName = /[^а-яА-ЯёЁ]/i;
+optionalItem[1].onkeypress = function (event) {
+	let bindingExpenses = event.key;
+	let patternName = /[^а-яА-ЯёЁ]/g;
+	console.log(bindingExpenses);
 	if (patternName.test(bindingExpenses)) {
-		event.target.value = "";
-		return;
+		return false;
 	}
 };
 
-optionalItem[2].onkeyup = function (event) {
-	let bindingExpenses = optionalItem[2].value;
-	let patternName = /[^а-яА-ЯёЁ]/i;
+optionalItem[2].onkeypress = function (event) {
+	let bindingExpenses = event.key;
+	let patternName = /[^а-яА-ЯёЁ]/g;
+	console.log(bindingExpenses);
 	if (patternName.test(bindingExpenses)) {
-		event.target.value = "";
-		return;
+		return false;
 	}
 };
 
+//Ввод только цифр в поля обязательных расходов и букв в их имена
+expensesItem[0].onkeypress = function (event) {
+	let bindingExpenses = event.key;
+	let patternName = /[^a-zA-Zа-яА-ЯёЁ]/g;
+	console.log(bindingExpenses);
+	if (patternName.test(bindingExpenses)) {
+		return false;
+	}
+};
+
+expensesItem[1].onkeypress = function (event) {
+	let bindingExpenses = event.key;
+	let patternName = /[^0-9]/g;
+	console.log(bindingExpenses);
+	if (patternName.test(bindingExpenses)) {
+		return false;
+	}
+};
+
+expensesItem[2].onkeypress = function (event) {
+	let bindingExpenses = event.key;
+	let patternName = /[^a-zA-Zа-яА-ЯёЁ]/g;
+	console.log(bindingExpenses);
+	if (patternName.test(bindingExpenses)) {
+		return false;
+	}
+};
+
+expensesItem[3].onkeypress = function (event) {
+	let bindingExpenses = event.key;
+	let patternName = /[^0-9]/g;
+	console.log(bindingExpenses);
+	if (patternName.test(bindingExpenses)) {
+		return false;
+	}
+};
+
+//Разблокируем кнопку "Утвердить при заполнении полей ввода"
+expensesItem[0].addEventListener('input', function () {
+	if (expensesItem[0].value && expensesItem[1].value || expensesItem[2].value && expensesItem[3].value) {
+		btnState_1.disable = false;
+		btnState_1.style.filter = 'brightness(1)';
+	} else {
+		btnState_1.disable = true;
+		btnState_1.style.filter = 'brightness(0.6)';
+	}
+});
+
+expensesItem[1].addEventListener('input', function () {
+	if (expensesItem[0].value && expensesItem[1].value || expensesItem[2].value && expensesItem[3].value) {
+		btnState_1.disable = false;
+		btnState_1.style.filter = 'brightness(1)';
+	} else {
+		btnState_1.disable = true;
+		btnState_1.style.filter = 'brightness(0.6)';
+	}
+});
+
+expensesItem[2].addEventListener('input', function () {
+	if (expensesItem[2].value && expensesItem[3].value || expensesItem[0].value && expensesItem[1].value) {
+		btnState_1.disable = false;
+		btnState_1.style.filter = 'brightness(1)';
+	} else {
+		btnState_1.disable = true;
+		btnState_1.style.filter = 'brightness(0.6)';
+	}
+});
+
+expensesItem[3].addEventListener('input', function () {
+	if (expensesItem[2].value && expensesItem[3].value || expensesItem[0].value && expensesItem[1].value) {
+		btnState_1.disable = false;
+		btnState_1.style.filter = 'brightness(1)';
+	} else {
+		btnState_1.disable = true;
+		btnState_1.style.filter = 'brightness(0.6)';
+	}
+});
 
 //Нажатие кнопки "Рассчитать"
 btnCalc.addEventListener('click', function () {
@@ -134,9 +207,7 @@ btnCalc.addEventListener('click', function () {
 			level.textContent = 'Непредвиденная ошибка';
 		}
 	} else {
-		dayBudget.textContent = 'Непредвиденная ошибка';
-		level.textContent = 'Непредвиденная ошибка';
-		alert("Заполните поля обязательных расходов и бюджет!");
+		alert('Нажмите кнопку "Начать расчет", введите Ваш бюджет, затем заполните хотя одну статью обязательных расходов и нажмите кнопку "Утвердить"' );
 	}
 });
 
@@ -191,6 +262,18 @@ let appData = {
 	income: [],
 	saving: false
 };
+
+//Начальные условия:
+//1. Если не нажата кнопка "Начать рассчёт", блокировать 1 кнопку "Утвердить" и "Рассчитать"
+function blockBtn() {
+	if (appData.budget === undefined || expensesItem[0].value && expensesItem[1].value || expensesItem[2].value && expensesItem[3].value) {
+		btnState_1.disable = true;
+		btnCalc.disable = true;
+		btnState_1.style.filter = 'brightness(0.6)';
+		btnCalc.style.filter = 'brightness(0.6)';
+	}
+};
+blockBtn();
 
 
 //Другой способ с помощью цикла for
