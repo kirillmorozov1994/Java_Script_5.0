@@ -40,6 +40,19 @@ btn.addEventListener('click', function () {
 	appData.budget = money;
 	appData.timeData = time;
 	budget.textContent = money.toFixed();
+
+	if (appData.budget <= 5000) {
+		budget.style.color = "#800000";
+	} else if (appData.budget <= 15000) {
+		budget.style.color = "red";
+	} else if (appData.budget > 15000 && appData.moneyPerDay <= 40000) {
+		budget.style.color = "#006400";
+	} else if (appData.budget > 40000) {
+		budget.style.color = "#00FF00";
+	} else {
+		//level.textContent = 'Непредвиденная ошибка';
+	}
+
 	year.value = new Date(Date.parse(time)).getFullYear();
 	month.value = new Date(Date.parse(time)).getMonth() + 1;
 	day.value = new Date(Date.parse(time)).getDate();
@@ -49,18 +62,25 @@ btn.addEventListener('click', function () {
 //Нажатие на 1 кнопку "Утвердить"
 let summ = 0;
 btnState_1.addEventListener('click', function () {
-		if (expensesItem[0].value && expensesItem[1].value || expensesItem[2].value && expensesItem[3].value) {
-				for (let i = 0; i < expensesItem.length; i++) {
-					let a = expensesItem[i].value,
-							b = +expensesItem[++i].value;
-
-						appData.expenses[a] = b;
-						summ += b;
-				}
-				expenses.textContent = summ;
-				btnCalc.disable = false;
-				btnCalc.style.filter = 'brightness(1)';
+	summ = 0;
+	if (expensesItem[0].value && expensesItem[1].value || expensesItem[2].value && expensesItem[3].value) {
+		if (+expensesItem[1].value != 0 || +expensesItem[3].value != 0) {
+			if (appData.expenses)
+			for (let i = 0; i < expensesItem.length; i++) {
+				let a = expensesItem[i].value,
+						b = +expensesItem[++i].value;
+						if(a == "" && b == 0) {
+							continue;
+						} else {
+							appData.expenses[a] = b;
+							summ += b;
+						}
+			}
+			expenses.textContent = summ;
+			btnCalc.disable = false;
+			btnCalc.style.filter = 'brightness(1)';
 		}
+	}
 });
 
 
@@ -84,7 +104,6 @@ btnState_2.addEventListener('click', function () {
 optionalItem[0].onkeypress = function (event) {
 		let bindingExpenses = event.key;
 		let patternName = /[^а-яА-ЯёЁ]/g;
-		console.log(bindingExpenses);
 		if (patternName.test(bindingExpenses)) {
 			return false;
 		}
@@ -93,7 +112,6 @@ optionalItem[0].onkeypress = function (event) {
 optionalItem[1].onkeypress = function (event) {
 	let bindingExpenses = event.key;
 	let patternName = /[^а-яА-ЯёЁ]/g;
-	console.log(bindingExpenses);
 	if (patternName.test(bindingExpenses)) {
 		return false;
 	}
@@ -102,7 +120,6 @@ optionalItem[1].onkeypress = function (event) {
 optionalItem[2].onkeypress = function (event) {
 	let bindingExpenses = event.key;
 	let patternName = /[^а-яА-ЯёЁ]/g;
-	console.log(bindingExpenses);
 	if (patternName.test(bindingExpenses)) {
 		return false;
 	}
@@ -112,7 +129,6 @@ optionalItem[2].onkeypress = function (event) {
 expensesItem[0].onkeypress = function (event) {
 	let bindingExpenses = event.key;
 	let patternName = /[^a-zA-Zа-яА-ЯёЁ]/g;
-	console.log(bindingExpenses);
 	if (patternName.test(bindingExpenses)) {
 		return false;
 	}
@@ -121,7 +137,6 @@ expensesItem[0].onkeypress = function (event) {
 expensesItem[1].onkeypress = function (event) {
 	let bindingExpenses = event.key;
 	let patternName = /[^0-9]/g;
-	console.log(bindingExpenses);
 	if (patternName.test(bindingExpenses)) {
 		return false;
 	}
@@ -130,7 +145,6 @@ expensesItem[1].onkeypress = function (event) {
 expensesItem[2].onkeypress = function (event) {
 	let bindingExpenses = event.key;
 	let patternName = /[^a-zA-Zа-яА-ЯёЁ]/g;
-	console.log(bindingExpenses);
 	if (patternName.test(bindingExpenses)) {
 		return false;
 	}
@@ -139,7 +153,6 @@ expensesItem[2].onkeypress = function (event) {
 expensesItem[3].onkeypress = function (event) {
 	let bindingExpenses = event.key;
 	let patternName = /[^0-9]/g;
-	console.log(bindingExpenses);
 	if (patternName.test(bindingExpenses)) {
 		return false;
 	}
@@ -190,18 +203,25 @@ expensesItem[3].addEventListener('input', function () {
 btnCalc.addEventListener('click', function () {
 		
 	if (appData.budget != undefined && summ != 0) {
-		console.log("" + appData.expenses);
 		let resultOut = (appData.budget - summ)/ 30;
 		appData.moneyPerDay = +resultOut.toFixed();
 		dayBudget.textContent = appData.moneyPerDay;
 
 		if (appData.moneyPerDay <= 0) {
+			dayBudget.style.color = "#800000";
+			level.style.color = "#800000";
 			level.textContent = 'Вы в долгах :-(';
 		} else if (appData.moneyPerDay <= 100) {
+			dayBudget.style.color = "red";
+			level.style.color = "red";
 			level.textContent = 'Минимальный уровень достатка';
 		} else if (appData.moneyPerDay > 100 && appData.moneyPerDay <= 2000) {
+			dayBudget.style.color = "#006400";
+			level.style.color = "#006400";
 			level.textContent = 'Средний уровень достатка';
 		} else if (appData.moneyPerDay > 2000) {
+			dayBudget.style.color = "#00FF00";
+			level.style.color = "#00FF00";
 			level.textContent = 'Высокий уровень достатка';
 		} else {
 			level.textContent = 'Непредвиденная ошибка';
@@ -243,7 +263,7 @@ chooseSumm.addEventListener('input', function () {
 choosePercent.addEventListener('input', function () {
 	if (appData.saving == true) {
 		let summ = +chooseSumm.value,
-			percent = +choosePercent.value;
+				percent = +choosePercent.value;
 		appData.monthIncome = summ / 100 / 12 * percent;
 		appData.yearIncome = summ / 100 * percent;
 
