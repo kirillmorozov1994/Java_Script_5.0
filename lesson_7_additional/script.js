@@ -48,4 +48,9 @@
 			
 		}, 1000 / fps);
 	}
-	step();
+
+	let btn = document.querySelector('.btn');
+	btn.addEventListener('click', function () {
+		btn.style.display = "none";
+		step();
+	});
