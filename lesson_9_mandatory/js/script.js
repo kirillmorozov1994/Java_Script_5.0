@@ -103,25 +103,14 @@ window.addEventListener('DOMContentLoaded', function () {
 		document.body.style.overflow = '';
 	});
 
-	let description = document.querySelectorAll('.description'),
-			infoBlock = document.querySelector('.info'),
-			descriptionBtn = document.querySelectorAll('.description-btn');
+	let infoBlock = document.querySelector('.info');
 
 	infoBlock.addEventListener('click', function (event) {
-		let target = event.target;
-		for (let i = 0; i < description.length; i++) {
-			if (description[i] == target.parentElement) {
-				if (target && target.classList.contains('description-btn')) {
-					for (let i = 0; i < tab.length; i++) {
-						if (descriptionBtn[i] == target) {
+			if (event.target && event.target.classList.contains('description-btn')) {
 							overlay.style.display = 'block';
-							this.classList.add('more-splash');
+							event.target.classList.add('more-splash');
 							document.body.style.overflow = 'hidden';
-						}
-					}
-				}
 			}
-		}
 	});
 	//Модальное окно ==================================================
 });
