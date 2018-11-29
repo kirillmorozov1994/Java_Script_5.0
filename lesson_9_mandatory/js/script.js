@@ -93,9 +93,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			close = document.querySelector('.popup-close');
 	
 	more.addEventListener('click', function () {
-		overlay.style.display = 'block';
-		this.classList.add('more-splash');
-		document.body.style.overflow = 'hidden';
+		showPopup();
 	});		
 	close.addEventListener('click', function () {
 		overlay.style.display = 'none';
@@ -107,10 +105,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	infoBlock.addEventListener('click', function (event) {
 			if (event.target && event.target.classList.contains('description-btn')) {
-							overlay.style.display = 'block';
-							event.target.classList.add('more-splash');
-							document.body.style.overflow = 'hidden';
+				showPopup();
 			}
 	});
+	function showPopup() {
+		overlay.style.display = 'block';
+		event.target.classList.add('more-splash');
+		document.body.style.overflow = 'hidden';
+	}
 	//Модальное окно ==================================================
 });
