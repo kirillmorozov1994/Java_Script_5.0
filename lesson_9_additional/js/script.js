@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	//Информационные табы ==============================================
 
 	//Таймер ===========================================================
-	let deadLine = '2018-11-29';
+	let deadLine = '2018-12-01';
 
 	function getTimerRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	setClock('timer', deadLine);
 	//Таймер ===========================================================
 
-	//Модальное окно ==================================================
+	//Модальное окно ===================================================
 	let more = document.querySelector('.more'),
 			overlay = document.querySelector('.overlay'),
 			close = document.querySelector('.popup-close');
@@ -108,10 +108,33 @@ window.addEventListener('DOMContentLoaded', function () {
 				showPopup();
 			}
 	});
+
 	function showPopup() {
-		overlay.style.display = 'block';
-		event.target.classList.add('more-splash');
-		document.body.style.overflow = 'hidden';
+		if (document.documentMode || /Edge/.test(navigator.userAgent)) {
+			overlay.style.display = 'block';
+			event.target.classList.add('more-splash');
+			document.body.style.overflow = 'hidden';
+		}
+		if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			overlay.classList.remove('fade');
+			overlay.style.display = 'block';
+			document.body.style.overflow = 'hidden';
+		}
+			let trans = 200,
+					op = 0;
+		overlay.classList.remove('fade');			
+		let id = setInterval(frame, 1);
+				function frame() {
+					if (trans == 0 || op == 1) {
+						clearInterval(id);
+					} else {
+						overlay.style.display = 'block';
+						trans = trans - 0.5;
+						op = op + 0.0025;
+						overlay.style.transform = `translateY(${trans}%)`;
+						overlay.style.opacity = `${op}`;
+					}
+				}
 	}
 	//Модальное окно ==================================================
 });

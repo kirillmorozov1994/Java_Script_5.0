@@ -64,13 +64,13 @@ window.addEventListener('DOMContentLoaded', function () {
 				function upDateClock(a = '0', b = '00') {
 					let t = getTimerRemaining(endtime);
 						if (t.hours < 10) {
-							t.hours = a + t.hours;
+							t.hours = `0 + ${t.hours}`;
 						}
 						if (t.minutes < 10) {
-							t.minutes= a + t.minutes;
+							t.minutes= `0 + ${t.minutes}`;
 						}
 						if (t.seconds < 10) {
-							t.seconds = a + t.seconds;
+							t.seconds = `0 + ${t.seconds}`;
 						}
 							hours.textContent = t.hours;
 							minutes.textContent = t.minutes;
@@ -78,9 +78,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
 							if(t.total <= 0) {
 								clearInterval(timeInterval);
-								hours.textContent = b;
-								minutes.textContent = b;
-								seconds.textContent = b;
+								hours.textContent = "00";
+								minutes.textContent = "00";
+								seconds.textContent = "00";
 							}
 				}
 	}
