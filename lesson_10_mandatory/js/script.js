@@ -6,20 +6,13 @@ window.addEventListener('DOMContentLoaded', function () {
 			info = document.querySelector('.info-header'),
 			tabContent = document.querySelectorAll('.info-tabcontent');
 	
-	// function hideTabContent(a) {
-	// 	for(let i = a; i < tabContent.length; i++) {
-	// 		tabContent[i].classList.remove('show');
-	// 		tabContent[i].classList.add('hide');
-	// 	}
-	// }
-
-	// hideTabContent(1);
 	let hideTabContent = (a) => {
 		for(let i = a; i < tabContent.length; i++) {
 			tabContent[i].classList.remove('show');
 			tabContent[i].classList.add('hide');
 		}
 	}
+
 
 	hideTabContent(1);
 
@@ -30,18 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	// info.addEventListener('click', function (event) {
-	// 	let target = event.target;
-	// 	if(target && target.classList.contains('info-header-tab')) {
-	// 		for(let i = 0; i < tab.length; i++) {
-	// 			if(target == tab[i]) {
-	// 				hideTabContent(0);
-	// 				showTabContent(i);
-	// 				break;
-	// 			}
-	// 		}
-	// 	}
-	info.addEventListener('click', function (event) {
+	info.addEventListener('click', (event) => {
 		let target = event.target;
 		if(target && target.classList.contains('info-header-tab')) {
 			for(let i = 0; i < tab.length; i++) {
@@ -56,7 +38,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	//Информационные табы ==============================================
 
 	//Таймер ===========================================================
-	let deadLine = '2018-12-01';
+	let deadLine = '2018-12-31';
 
 	let getTimerRemaining = (endtime) => {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -79,16 +61,16 @@ window.addEventListener('DOMContentLoaded', function () {
 				seconds = timer.querySelector('.seconds');
 				let timeInterval = setInterval(upDateClock, 1000);
 
-				function upDateClock() {
+				function upDateClock(a = '0', b = '00') {
 					let t = getTimerRemaining(endtime);
 						if (t.hours < 10) {
-							t.hours = '0' + t.hours;
+							t.hours = a + t.hours;
 						}
 						if (t.minutes < 10) {
-							t.minutes= '0' + t.minutes;
+							t.minutes= a + t.minutes;
 						}
 						if (t.seconds < 10) {
-							t.seconds = '0' + t.seconds;
+							t.seconds = a + t.seconds;
 						}
 							hours.textContent = t.hours;
 							minutes.textContent = t.minutes;
@@ -96,9 +78,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
 							if(t.total <= 0) {
 								clearInterval(timeInterval);
-								hours.textContent = '00';
-								minutes.textContent = '00';
-								seconds.textContent = '00';
+								hours.textContent = b;
+								minutes.textContent = b;
+								seconds.textContent = b;
 							}
 				}
 	}

@@ -13,11 +13,11 @@ window.addEventListener('DOMContentLoaded', function () {
 			let div = document.createElement('div');
 			document.body.appendChild(div);
 			div.innerText = text;
-			div.style.height = `${this.height}px`;
-			div.style.width = `${this.width}px`;
-			div.style.backgroundColor = this.bg;
-			div.style.fontSize = `${this.fontSize}px`;
-			div.style.textAlign = this.textAlign;
+			div.style.cssText = `height: ${this.height}px; 
+			width: ${this.width}px; 
+			background-color: ${this.bg}; 
+			font-size: ${this.fontSize}px; 
+			text-align: ${this.textAlign};`;
 
 		}
 	}
