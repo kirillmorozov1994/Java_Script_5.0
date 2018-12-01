@@ -5,8 +5,10 @@ window.addEventListener('DOMContentLoaded', function () {
 		input.addEventListener('input', maskInput);
 		input.addEventListener('click', maskInput);
 
-	function maskInput() {
-		let matrix = this.defaultValue,
+	function maskInput(event) {
+		//if(this.length != 15)
+		//console.log(i);
+		let matrix = this.defaultValue;
 			i = 0,
 			def = matrix.replace(/\D/g, ""),
 			val = this.value.replace(/\D/g, "");
@@ -14,38 +16,38 @@ window.addEventListener('DOMContentLoaded', function () {
 			val = def;
 		}
 		matrix = matrix.replace(/[_\d]/g, function (a) {
-			console.log(val.charAt(i));
 			if (val.charAt(i) == "") {
 				return "_";
 			}
 			return val.charAt(i++);
 		});
-		console.log(matrix);
 		this.value = matrix;
-		i = matrix.lastIndexOf(val.substr(-1));
+		if (i == 15) {
+			console.log(i);
+			return false;
+		} else {
+			i = matrix.lastIndexOf(val.substr(-1));
+		}
 		if (i < matrix.length && matrix != this.defaultValue) {
-			i++;
+				i++;
 		} else {
 			i = matrix.indexOf("_");
 		}
-		console.log(i);
-		console.log(this);
 		setCursorPosition(i, this);
 	}	
 
 	function setCursorPosition(pos, elem) {
-		elem.focus();
-		console.log(elem);
-		console.log(elem.setSelectionRange);
+		if(pos == 15) {
+			return false;
+		}
 		if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);
 		else if (elem.createTextRange) {
 			let range = elem.createTextRange();
-			console.log(range);
 			range.collapse(true);
 			range.moveEnd("character", pos);
 			range.moveStart("character", pos);
 			range.select();
-			console.log(range);
+			//console.log(range);
 		}
 	}
 

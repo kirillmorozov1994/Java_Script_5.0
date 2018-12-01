@@ -1,0 +1,77 @@
+.popup {
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	line-height: 100vh;
+	background-color: aqua;
+	opacity: 0;
+	transform: translateY(-200%);
+	z-index: 100;
+}
+.close {
+	position: absolute;
+	top: -10%;
+	left: 60%;
+	font-size: 40px;
+	cursor: pointer;
+	z-index: 200;
+}
+body {
+	text-align: center;
+	line-height: 100vh;
+}
+.btn {
+	border: none;
+	background-color: bisque;
+	padding: 10px 20px;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 20px;
+	outline: none;
+}
+@keyframes fade {
+	from{
+		opacity: 0.1;
+		transform: translateY(-200%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0%);
+	}
+}
+@keyframes hide {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	to {
+		opacity: 0;
+		transform: translateY(-200%);
+	}
+}
+.fade {
+	-webkit-animation-name: fade;
+	animation-name: fade;
+	-webkit-animation-duration: 2.5s;
+	animation-duration: 2.5s;
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 2.5s;
+	transform: translateY(0%);
+	opacity: 1;
+}
+.hide {
+	-webkit-animation-name: hide;
+	animation-name: hide;
+	-webkit-animation-duration: 2.5s;
+	animation-duration: 2.5s;
+	-webkit-animation-name: hide;
+	-webkit-animation-duration: 2.5s;
+	transform: translateY(-200%);
+	opacity: 0;
+}
