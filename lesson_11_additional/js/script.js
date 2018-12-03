@@ -97,9 +97,11 @@ window.addEventListener('DOMContentLoaded', function () {
 		showPopup(this);
 	});		
 	close.addEventListener('click', function () {
+		console.log('tret');
 		overlay.style.display = 'none';
 		more.classList.remove('more-splash');
 		document.body.style.overflow = '';
+		statusMessage.innerHTML = "";
 	});
 
 	let infoBlock = document.querySelector('.info');
@@ -133,7 +135,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			statusMessage.classList.add('status');
 			form.appendChild(statusMessage);
 
-			// Валидация формы + маска телефона ===========================
+	// Валидация формы + маска телефона ===========================
 			form.addEventListener('input', function (event) {
 				if(event.target.tagName == 'INPUT') {
 						maskInput(event.target);
@@ -172,7 +174,8 @@ window.addEventListener('DOMContentLoaded', function () {
 				}
 				setCursorPosition(i, a);
 			}
-			// Валидация формы + маска телефона ===========================
+	
+
 			function setCursorPosition(pos, elem) {
 				if (pos == 15) {
 					return false;
@@ -188,10 +191,17 @@ window.addEventListener('DOMContentLoaded', function () {
 					}
 				}
 			}
-			
+	// Валидация формы + маска телефона ===========================
 			form.addEventListener('submit', function (event) {
 				event.preventDefault();
 				form.appendChild(statusMessage);
+
+				if (event.target.children[2].value.lastIndexOf('_') != -1) {
+					statusMessage.innerHTML = `<img src="${message.novalidate}" />`;
+					return false;
+				} else {
+					statusMessage.innerHTML = `<img src="${message.validate}" />`;
+				}
 
 				let request = new XMLHttpRequest();
 				request.open('POST', 'server.php');
