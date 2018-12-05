@@ -3,77 +3,74 @@
 	margin: 0;
 	font-family: 'Roboto', sans-serif;
 }
-img {
-	width: 100%;
-	transform: translateX(30px);
-	margin-top: -4px;
+body {
+	height: 100vh;
+	width: 100vw;
 }
 .header {
 	background-image: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);
-	margin-bottom: 4px;
-}
-.header-title h1{
-	text-align: center;
-	margin: 0;
-	padding: 10px 0;
-}
-.section-cars, .section-production, .section-price {
-	margin-top: -4px;
-	margin-bottom: 4px;
-	padding: 5px;
+	height: 10vh;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.header-title {
+	font-size: 36px;
+}
+.wrapper {
+	height: 90vh;
+	width: 35vw;
+	display: inline-block;
+	vertical-align: top;
+}
+.section-production, .section-cars, .section-description, .section-price {
+	display: flex;
+	align-items: center;
 	justify-content: space-between;
-	align-items: flex-end;
-	margin-top: -4px;
-	margin-left: -15px;
-	padding-top: 20px;
-	padding: 60px 0;
-	border-bottom: 1px solid #3f3f3f;
-	width: 117%;
-	padding-right: 20px;
-	padding-left: 15px;
+	padding: 0 20px;
 	background-image: linear-gradient(135deg, #2AFADF 10%, #4C83FF 100%);
+}
+.section-img {
+	display: inline-block;
+	width: 65vw;
+	height: 90vh;
+	margin-left: -5px;
+	background-image: url(https://st.motortrend.com/uploads/sites/10/2017/12/2018-BMW-M5-front-three-quarter-09.jpg);
+	background-size: cover;
+}
+.section-production {
+	height: 10vh;
+}
+.section-cars {
+	height: 20vh;
+}
+.section-description {
+	height: 50vh;
+	margin-top: -1px;
+	font-size: 24px;
+	font-style: italic;
+	overflow: auto;
+}
+.section-price {
+	height: 10vh;
 }
 .section-cars {
 	background-image: linear-gradient(135deg, #3C8CE7 10%, #00EAFF 100%);
 }
 .section-description {
-	margin-top: -4px;
-	margin-bottom: 4px;
-	padding: 5px;
-	display: flex;
-	justify-content: space-between;
-	margin-top: -4px;
-	margin-left: -15px;
-	padding-top: 20px;
-	padding: 35px 0;
-	border-bottom: 1px solid #3f3f3f;
-	width: 117%;
-	padding-right: 20px;
-	padding-left: 15px;
 	background-image: linear-gradient(135deg, #2AFADF 10%, #4C83FF 100%);
-	font-style: italic;
-	font-size: 24px;
-	height: 427px;
-	overflow: auto;
 }
 .section-price {
 	background-image: linear-gradient(135deg, #3C8CE7 10%, #00EAFF 100%);
-	padding: 30px 0;
-	padding-right: 20px;
-	padding-left: 15px;
-	align-items: center;
-}
-.production-cars, .mark-cars{
-	display: inline-block;
-	vertical-align: middle;
-	margin-bottom: 0;
 }
 .selectpicker {
 	outline: none;
-	font-size: 24px;
+	font-size: 20px;
 	vertical-align: middle;
 }
 .price {
 	font-size: 24px;
+}
+.hide {
+	display: none;
 }

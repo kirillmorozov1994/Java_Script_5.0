@@ -64,13 +64,13 @@ window.addEventListener('DOMContentLoaded', function () {
 				function upDateClock(a = '0', b = '00') {
 					let t = getTimerRemaining(endtime);
 						if (t.hours < 10) {
-							t.hours = `0 + ${t.hours}`;
+							t.hours = `0${t.hours}`;
 						}
 						if (t.minutes < 10) {
-							t.minutes= `0 + ${t.minutes}`;
+							t.minutes= `0${t.minutes}`;
 						}
 						if (t.seconds < 10) {
-							t.seconds = `0 + ${t.seconds}`;
+							t.seconds = `0${t.seconds}`;
 						}
 							hours.textContent = t.hours;
 							minutes.textContent = t.minutes;

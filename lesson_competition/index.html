@@ -10,76 +10,63 @@
 </head>
 <body>
 	<header class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col header-title">
-					<h1>Карточка выбора автомобиля</h1>
-				</div>
-			</div>
+		<div class="header-title">
+				Карточка выбора автомобиля
 		</div>
 	</header>
 
-	<div class="desc">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-3">
+	<div class="wrapper">
 
-					<div class="section-production">
+		<div class="section-production">
+			<h2 class="production-cars">Производитель автомобиля:</h2>
+			<select class="selectpicker country">
+				<option value="Германия">Германия</option>
+				<option value="Италия">Италия</option>
+				<option value="Франция">Франция</option>
+			</select>
+		</div>
 
-						<h2 class="production-cars">Производитель автомобиля:</h2>
+		<div class="section-cars">
+			<h2 class="mark-cars">Марка автомобиля:</h2>
+			<select class="selectpicker germany-cars">
+				<option selected value="BMW M5">BMW M5</option>
+				<option value="Volkswagen Passat">Volkswagen Passat</option>
+				<option value="Opel Vectra">Opel Vectra</option>
+			</select>
 
-						<select class="selectpicker">
-							<option value="Германия">Германия</option>
-							<option value="Италия">Италия</option>
-							<option value="Франция">Франция</option>
-						</select>
+			<select class="selectpicker italian-cars hide">
+				<option selected value="Fiat Panda">Fiat Panda</option>
+				<option value="Ferrari F12">Ferrari F12</option>
+				<option value="Lamborghini Huracán">Lamborghini Huracán</option>
+			</select>
 
-					</div>
+			<select class="selectpicker france-cars hide">
+				<option selected value="Citroën C3">Citroën C3</option>
+				<option value="Dacia Duster">Dacia Duster</option>
+			</select>
 
-					<div class="section-cars">
+		</div>
 
-						<h2 class="mark-cars">Марка автомобиля:</h2>
-
-						<select class="selectpicker germany-cars">
-							<option value="BMW M5">BMW M5</option>
-							<option value="Volkswagen Passat">Volkswagen Passat</option>
-							<option value="Opel Vectra">Opel Vectra</option>
-						</select>
-
-						<!-- <select class="selectpicker italian-cars">
-							<option value="Fiat Panda">Fiat Panda</option>
-							<option value="Ferrari F12">Ferrari F12</option>
-							<option value="Lamborghini Huracán">Lamborghini Huracán</option>
-						</select>
-
-						<select class="selectpicker france-cars">
-							<option value="Citroën C3">Citroën C3</option>
-							<option value="Dacia Duster">Dacia Duster</option>
-						</select> -->
-
-					</div>
-
-					<div class="section-description">
-						<div class="desc-cars">
-							Is a high performance variant of the 5 Series executive car built by the Motorsport division of BMW. The first
-							incarnation of the M5 was hand-built in 1986 on the 535i chassis with a modified engine from the M1 that made it the
-							fastest production sedan at the time.Versions of the M5 have been built from subsequent generations of the 5 Series
-							platform.
-						</div>
-					</div>
-
-					<div class="section-price">
-						<h2 class="cars-price">Цена:</h2>
-						<div class="price">
-							61000$
-						</div>
-					</div>
-				</div>
-				<div class="col-9 img-collection">
-					<img src="https://st.motortrend.com/uploads/sites/10/2017/12/2018-BMW-M5-front-three-quarter-09.jpg">
-				</div>
+		<div class="section-description">
+			<div class="desc-cars">
+				Is a high performance variant of the 5 Series executive car built by the Motorsport division of BMW. The first
+				incarnation of the M5 was hand-built in 1986 on the 535i chassis with a modified engine from the M1 that made it the
+				fastest production sedan at the time.Versions of the M5 have been built from subsequent generations of the 5 Series
+				platform.
 			</div>
 		</div>
+
+		<div class="section-price">
+			<h2 class="cars-price">Цена:</h2>
+			<div class="price">
+				61000$
+			</div>
+		</div>
+
+	</div>
+
+	<div class="section-img">
+
 	</div>
 
 
