@@ -124,7 +124,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	}
 //Модальное окно ==================================================
 
-//Отправка формы ==================================================
+//Отправка формы через модальное окно ==============================
 
 	//Создание объекта валидации и ответа сервера ===================
 	let message = {
@@ -259,7 +259,10 @@ window.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-//Отправка формы ==================================================
+//Отправка формы через модальное окно ==============================
+
+//Отправка формы (footer) ==========================================
+//Отправка формы (footer) ==========================================
 
 //Пишем слайдер ===================================================
 
@@ -320,13 +323,15 @@ window.addEventListener('DOMContentLoaded', function () {
 		totalValue = document.getElementById('total'),
 		personsSum = 0,
 		daysSum = 0,
-		total = 0;
+		total = 0,
+		selOption = 0;
 
 		totalValue.textContent = 0;
 
 		persons.addEventListener('input', function () {
 				personsSum = +this.value;
-				total = (daysSum + personsSum) * 4000;
+				selOption = place.options[place.selectedIndex].value;
+				total = (daysSum + personsSum) * 4000 * +selOption;
 
 
 				if (personsSum == '' || personsSum == '0' || restDays.value == '' || restDays.value == '0') {
@@ -340,7 +345,8 @@ window.addEventListener('DOMContentLoaded', function () {
 		restDays.addEventListener('input', function () {
 
 				daysSum = +this.value;
-				total = (daysSum + personsSum) * 4000;
+				selOption = place.options[place.selectedIndex].value;
+				total = (daysSum + personsSum) * 4000 * +selOption;
 
 				if (daysSum == '' || daysSum == '0' || persons.value == '' || persons.value == '0') {
 					totalValue.textContent = 0;
@@ -363,11 +369,13 @@ window.addEventListener('DOMContentLoaded', function () {
 		}
 
 		place.addEventListener('change', function() {
-			if (persons.value == '' && restDays.value == '') {
+			if (personsSum == '' || personsSum == '0' || restDays.value == '' || restDays.value == '0') {
 				totalValue.textContent = 0;
 			} else {
-				let a = total;
-				totalValue.textContent = a * this.options[this.selectedIndex].value;
+				console.log(restDays.value);
+				selOption = place.options[place.selectedIndex].value;
+				total = (daysSum + personsSum) * 4000 * +selOption;
+				totalValue.textContent = total;
 			}
 		});
 

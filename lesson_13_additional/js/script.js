@@ -270,31 +270,21 @@ window.addEventListener('DOMContentLoaded', function () {
 		dotsWrap = document.querySelector('.slider-dots'),
 		dots = document.querySelectorAll('.dot');
 
-	showSlides(slideIndex);
 
-	function showSlides(n) {
-		
-		if(n > slides.length) {
-			slideIndex = 1;
-		}
-		if(n < 1) {
-			slideIndex = slides.length;
-		}
+	animateSliderPrev(slideIndex);
 
-		slides.forEach((item) => item.style.display = 'none');
-		dots.forEach((item) => item.classList.remove('dot-active'));
-
-		//slides[slideIndex - 1].style.display = 'block';
-		animateSlider(slides[slideIndex - 1]);
-		dots[slideIndex - 1].classList.add('dot-active');
-	}
 
 	function incrSlides(n) {
-		showSlides(slideIndex += n);
+		if(n == -1) {
+			animateSliderPrev(slideIndex += n);
+		} else {
+			animateSliderNext(slideIndex += n);
+		}
+	
 	}
 
 	function currentSlide(n) {
-		showSlides(slideIndex = n);
+		animateSliderPrev(slideIndex = n);
 	}
 
 	prev.addEventListener('click', function () {
@@ -313,18 +303,58 @@ window.addEventListener('DOMContentLoaded', function () {
 	});
 
 	//Анимация слайдера
-	function animateSlider(prevSlide) {
-			prevSlide.style.display = 'block';
+	function animateSliderPrev(n) {
+		if (n > slides.length) {
+			slideIndex = 1;
+		}
+		if (n < 1) {
+			slideIndex = slides.length;
+		}
+
+		slides.forEach((item) => item.style.display = 'none');
+		dots.forEach((item) => item.classList.remove('dot-active'));
+
+			slides[slideIndex - 1].style.display = 'block';
+			dots[slideIndex - 1].classList.add('dot-active');
 			let prev = 100;
+
 		let animSlider = setInterval(function() {
 			if(prev != 0) {
 				prev--;
-				prevSlide.style.transform = `translateX(${prev}%)`;
-			} else {
+				slides[slideIndex - 1].style.transform = `translateX(${prev}%)`;
+			} 
+			else {
 				clearInterval(animSlider);
 			}
 		}, 10);
 	}
+
+	function animateSliderNext(n) {
+		if (n > slides.length) {
+			slideIndex = 1;
+		}
+		if (n < 1) {
+			slideIndex = slides.length;
+		}
+
+		slides.forEach((item) => item.style.display = 'none');
+		dots.forEach((item) => item.classList.remove('dot-active'));
+
+		slides[slideIndex - 1].style.display = 'block';
+		dots[slideIndex - 1].classList.add('dot-active');
+		let next = -100;
+
+		let animSlider = setInterval(function () {
+			if (next != 0) {
+				next++;
+				slides[slideIndex - 1].style.transform = `translateX(${next}%)`;
+			}
+			else {
+				clearInterval(animSlider);
+			}
+		}, 10);
+	}
+
 
 //Кулькулятор ===================================================
 
@@ -334,15 +364,17 @@ window.addEventListener('DOMContentLoaded', function () {
 		totalValue = document.getElementById('total'),
 		personsSum = 0,
 		daysSum = 0,
-		total = 0;
+		total = 0,
+		selOption = 0;
+
 		totalValue.textContent = 0;
 
 		persons.addEventListener('input', function () {
 				personsSum = +this.value;
-				total = (daysSum + personsSum) * 4000;
-				console.log(personsSum);
+				selOption = place.options[place.selectedIndex].value;
+				total = (daysSum + personsSum) * 4000 * +selOption;
 
-				if ((restDays.value == '' || restDays.value != '') && (persons.value == '' || personsSum == '0')) {
+				if (personsSum == '' || personsSum == '0' || restDays.value == '' || restDays.value == '0') {
 					totalValue.textContent = 0;
 				} else {
 					animateCalc(total);
@@ -353,9 +385,10 @@ window.addEventListener('DOMContentLoaded', function () {
 		restDays.addEventListener('input', function () {
 
 				daysSum = +this.value;
-				total = (daysSum + personsSum) * 4000;
+				selOption = place.options[place.selectedIndex].value;
+				total = (daysSum + personsSum) * 4000 * +selOption;
 
-				if ((persons.value == '' || persons.value != '') && (restDays.value == '' || restDays.value == '0')) {
+				if (daysSum == '' || daysSum == '0' || persons.value == '' || persons.value == '0') {
 					totalValue.textContent = 0;
 				} else {
 					animateCalc(total);
@@ -376,12 +409,12 @@ window.addEventListener('DOMContentLoaded', function () {
 		}
 
 		place.addEventListener('change', function() {
-			if (persons.value == '' && restDays.value == '') {
+			selOption = place.options[place.selectedIndex].value;
+			total = (daysSum + personsSum) * 4000 * +selOption;
+			if (personsSum == '' || personsSum == '0' || restDays.value == '' || restDays.value == '0') {
 				totalValue.textContent = 0;
 			} else {
-				let a = total;
-				animateCalc(a * +this.options[this.selectedIndex].value);
-				//totalValue.textContent = a * this.options[this.selectedIndex].value;
+				animateCalc(total);
 			}
 		});
 
@@ -389,8 +422,7 @@ window.addEventListener('DOMContentLoaded', function () {
 				let num = 0;
 				let anim = setInterval(() => {
 					if(num != result) {
-						if (((restDays.value != '' || restDays.value == '') && persons.value != '') && ((persons.value != '' || persons.value == '') && restDays.value != '')) {
-							console.log(persons.value != '');
+						if (!personsSum == '' || !personsSum == '0' || !restDays.value == '' || !restDays.value == '0') {
 							num += 100;
 							totalValue.textContent = num;
 						} else {
