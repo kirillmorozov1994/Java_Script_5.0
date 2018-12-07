@@ -3,7 +3,7 @@ $(document).ready(function () {
 //Модальное окно ====================================================================
 	$('.main_btna, .main_btn, .main_nav li:eq(1)').on('click', function () {
 		$('.overlay').fadeIn('slow');
-		$('.modal').css({'display': 'block', 'marginTop': '-20%', 'width': '60%'}).animate(
+		$('.modal').css({'display': 'block', 'marginTop': '-30%', 'width': '60%'}).animate(
 			{
 				opacity: '1',
 				marginTop: '10%',
@@ -15,7 +15,7 @@ $(document).ready(function () {
 		$('.modal').animate(
 			{
 				opacity: '0',
-				marginTop: '-20%',
+				marginTop: '-30%',
 				width: '60%'
 			}, 'slow');
 	});
@@ -35,7 +35,7 @@ $('.form-inline').submit(function (event) {
 		$('.overlay').fadeOut('slow');
 		$('.modal').animate({
 			opacity: '0',
-			marginTop: '-20%',
+			marginTop: '-30%',
 			width: '60%'
 		}, 'slow');
 	}).fail(function () {
