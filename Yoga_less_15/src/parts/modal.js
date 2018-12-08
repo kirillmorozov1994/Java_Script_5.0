@@ -1,92 +1,4 @@
-window.addEventListener('DOMContentLoaded', function () {
-	
-	'use strict';
-	//Информационные табы ==============================================
-	let tab = document.querySelectorAll('.info-header-tab'),
-			info = document.querySelector('.info-header'),
-			tabContent = document.querySelectorAll('.info-tabcontent');
-	
-	let hideTabContent = (a) => {
-		for(let i = a; i < tabContent.length; i++) {
-			tabContent[i].classList.remove('show');
-			tabContent[i].classList.add('hide');
-		}
-	}
-
-
-	hideTabContent(1);
-
-	let showTabContent = (b) => {
-		if(tabContent[b].classList.contains('hide')) {
-			tabContent[b].classList.remove('hide');
-			tabContent[b].classList.add('show');
-		}
-	}
-
-	info.addEventListener('click', (event) => {
-		let target = event.target;
-		if(target && target.classList.contains('info-header-tab')) {
-			for(let i = 0; i < tab.length; i++) {
-				if(target == tab[i]) {
-					hideTabContent(0);
-					showTabContent(i);
-					break;
-				}
-			}
-		}
-	});
-	//Информационные табы ==============================================
-
-	//Таймер ===========================================================
-	let deadLine = '2018-12-07';
-
-	let getTimerRemaining = (endtime) => {
-		let t = Date.parse(endtime) - Date.parse(new Date()),
-				seconds = Math.floor((t/1000) % 60),
-				minutes = Math.floor((t/1000/60) % 60),
-				hours = Math.floor((t/(1000*60*60)));
-
-				return {
-					'total' : t,
-					'hours' : hours,
-					'minutes' : minutes,
-					'seconds' : seconds
-				};
-	}
-	
-	let setClock = (id, endtime) => {
-		let timer = document.getElementById(id),
-				hours = timer.querySelector('.hours'),
-				minutes = timer.querySelector('.minutes'),
-				seconds = timer.querySelector('.seconds');
-				let timeInterval = setInterval(upDateClock, 1000);
-
-				function upDateClock(a = '0', b = '00') {
-					let t = getTimerRemaining(endtime);
-						if (t.hours < 10) {
-							t.hours = `0${t.hours}`;
-						}
-						if (t.minutes < 10) {
-							t.minutes= `0${t.minutes}`;
-						}
-						if (t.seconds < 10) {
-							t.seconds = `0${t.seconds}`;
-						}
-							hours.textContent = t.hours;
-							minutes.textContent = t.minutes;
-							seconds.textContent = t.seconds;
-
-							if(t.total <= 0) {
-								clearInterval(timeInterval);
-								hours.textContent = "00";
-								minutes.textContent = "00";
-								seconds.textContent = "00";
-							}
-				}
-	}
-
-	setClock('timer', deadLine);
-//Таймер ===========================================================
+function modalForm() {
 
 //Модальное окно ==================================================
 	let more = document.querySelector('.more'),
@@ -104,9 +16,7 @@ window.addEventListener('DOMContentLoaded', function () {
 		more.classList.remove('more-splash');
 		document.body.style.overflow = '';
 		statusMessage.innerHTML = "";
-		statusMessageFoot.innerHTML = "";
 		clearInput();
-		clearInputFoot();
 	});
 
 	let infoBlock = document.querySelector('.info');
@@ -124,7 +34,7 @@ window.addEventListener('DOMContentLoaded', function () {
 		t.classList.add('more-splash');
 		document.body.style.overflow = 'hidden';
 	}
-//Модальное окно ==================================================
+//Модальное окно ==================================================	
 
 //Отправка формы через модальное окно ==============================
 
@@ -141,6 +51,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	let form = document.querySelector('.main-form'),
 			input = form.getElementsByTagName('input'),
 			statusMessage = document.createElement('div');
+
 
 	//Контейнер валидации формы и ответа сервeра
 		statusMessage.classList.add('status');
@@ -248,7 +159,7 @@ window.addEventListener('DOMContentLoaded', function () {
 				}
 
 				postData(formData).then(() => statusMessage.innerHTML = `<img src="${message.loadind}" />`)
-													.then(() => statusMessage.innerHTML = `<img src="${message.success}" />`)
+													.then(() => statusMessage.innerHTML = "")
 													.catch(() => statusMessage.innerHTML = `<img src="${message.failure}" />`).then(clearInput).then(clearInputFoot);
 
 			});
@@ -268,8 +179,8 @@ window.addEventListener('DOMContentLoaded', function () {
 	//Создаем переменные с формой и инпутами
 	let formFoot = document.querySelector('#form'),
 			inputFoot = formFoot.getElementsByTagName('input'),
-			statusMessageFoot = document.createElement('div'),
-			btnFoot = formFoot.children[2];
+			btnFoot = formFoot.children[2],
+			statusMessageFoot = document.createElement('div');
 
 	//Контейнер валидации формы и ответа сервeра
 	statusMessageFoot.classList.add('status');
@@ -345,10 +256,10 @@ window.addEventListener('DOMContentLoaded', function () {
 		event.preventDefault();
 
 		if (event.target.children[1].value.lastIndexOf('_') != -1) {
-			statusMessage.innerHTML = `<img src="${message.novalidate}" />`;
+			statusMessageFoot.innerHTML = `<img src="${message.novalidate}" />`;
 			return false;
 		} else {
-			statusMessage.innerHTML = `<img src="${message.validate}" />`;
+			statusMessageFoot.innerHTML = `<img src="${message.validate}" />`;
 		}
 
 		let request = new XMLHttpRequest();
@@ -360,12 +271,10 @@ window.addEventListener('DOMContentLoaded', function () {
 		function postData(formData) {
 			return new Promise(function (resolve, reject) {
 				let obj = {};
-				console.log(formData);
 				formData.forEach(function (value, key) {
 					obj[key] = value;
 				});
 				let json = JSON.stringify(obj);
-				console.log(json);
 
 				request.send(json);
 
@@ -383,7 +292,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 		postData(formData).then(() => statusMessageFoot.innerHTML = `<img src="${message.loadind}" />`)
 			.then(() => statusMessageFoot.innerHTML = '')
-			.catch(() => statusMessageFoot.innerHTML = `<img src="${message.failure}" />`).then(clearInputFoot);
+			.catch(() => statusMessageFoot.innerHTML = `<img src="${message.failure}" />`).then(clearInputFoot).then(clearInput);
 
 	});
 	//Отправка данных на сервер ===================================
@@ -397,120 +306,6 @@ window.addEventListener('DOMContentLoaded', function () {
 	clearInputFoot();
 //Отправка формы (footer) ==========================================
 
-//Пишем слайдер ===================================================
+}
 
-	let slideIndex = 1,
-		slides = document.querySelectorAll('.slider-item'),
-		prev = document.querySelector('.prev'),
-		next = document.querySelector('.next'),
-		dotsWrap = document.querySelector('.slider-dots'),
-		dots = document.querySelectorAll('.dot');
-
-	showSlides(slideIndex);
-
-	function showSlides(n) {
-		
-		if(n > slides.length) {
-			slideIndex = 1;
-		}
-		if(n < 1) {
-			slideIndex = slides.length;
-		}
-
-		slides.forEach((item) => item.style.display = 'none');
-		dots.forEach((item) => item.classList.remove('dot-active'));
-
-		slides[slideIndex - 1].style.display = 'block';
-		dots[slideIndex - 1].classList.add('dot-active');
-	}
-
-	function incrSlides(n) {
-		showSlides(slideIndex += n);
-	}
-
-	function currentSlide(n) {
-		showSlides(slideIndex = n);
-	}
-
-	prev.addEventListener('click', function () {
-		incrSlides(-1);
-	});
-	next.addEventListener('click', function () {
-		incrSlides(1);
-	});
-
-	dotsWrap.addEventListener('click', function (event) {
-		for(let i = 0; i <= dots.length; i++) {
-			if(event.target.classList.contains('dot') && event.target == dots[i -1]) {
-				currentSlide(i);
-			}
-		}
-	});
-
-
-//Кулькулятор ===================================================
-
-	let persons = document.querySelectorAll('.counter-block-input')[0],
-		restDays = document.querySelectorAll('.counter-block-input')[1],
-		place = document.getElementById('select'),
-		totalValue = document.getElementById('total'),
-		personsSum = 0,
-		daysSum = 0,
-		total = 0,
-		selOption = 0;
-
-		totalValue.textContent = 0;
-
-		persons.addEventListener('input', function () {
-				personsSum = +this.value;
-				selOption = place.options[place.selectedIndex].value;
-				total = (daysSum + personsSum) * 4000 * +selOption;
-
-
-				if (personsSum == '' || personsSum == '0' || restDays.value == '' || restDays.value == '0') {
-					totalValue.textContent = 0;
-				} else {
-					totalValue.textContent = total;
-				}
-		});
-
-
-		restDays.addEventListener('input', function () {
-
-				daysSum = +this.value;
-				selOption = place.options[place.selectedIndex].value;
-				total = (daysSum + personsSum) * 4000 * +selOption;
-
-				if (daysSum == '' || daysSum == '0' || persons.value == '' || persons.value == '0') {
-					totalValue.textContent = 0;
-				} else {
-					totalValue.textContent = total;
-				}
-
-		});
-
-		persons.onkeypress = function (event) {
-			if (event.key == '+' || event.key == 'e' || event.key == ',' || event.key == '.' || event.key == '-' || event.key == 'E') {
-				return false;
-			}
-		}
-
-		restDays.onkeypress = function (event) {
-			if (event.key == '+' || event.key == 'e' || event.key == ',' || event.key == '.' || event.key == '-' || event.key == 'E') {
-				return false;
-			}
-		}
-
-		place.addEventListener('change', function() {
-			if (personsSum == '' || personsSum == '0' || restDays.value == '' || restDays.value == '0') {
-				totalValue.textContent = 0;
-			} else {
-				console.log(restDays.value);
-				selOption = place.options[place.selectedIndex].value;
-				total = (daysSum + personsSum) * 4000 * +selOption;
-				totalValue.textContent = total;
-			}
-		});
-
-
-});
+module.exports = modalForm;

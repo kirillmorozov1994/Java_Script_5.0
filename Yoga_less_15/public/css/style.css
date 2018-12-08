@@ -311,7 +311,6 @@ header ul li:before {
 .content .slider .wrap {
   width: 100%;
 	position: relative;
-	overflow: hidden;
 }
 .content .slider .wrap .slider-item {
   width: 80%;

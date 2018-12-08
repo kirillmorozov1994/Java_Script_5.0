@@ -381,7 +381,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 		postData(formData).then(() => statusMessageFoot.innerHTML = `<img src="${message.loadind}" />`)
 			.then(() => statusMessageFoot.innerHTML = '')
-			.catch(() => statusMessageFoot.innerHTML = `<img src="${message.failure}" />`).then(clearInputFoot);
+			.catch(() => statusMessageFoot.innerHTML = `<img src="${message.failure}" />`).then(clearInputFoot).then(clearInput);
 
 	});
 	//Отправка данных на сервер ===================================
@@ -406,7 +406,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 	animateSliderPrev(slideIndex);
-
 
 	function incrSlides(n) {
 		if(n == -1) {
