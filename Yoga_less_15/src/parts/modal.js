@@ -160,7 +160,16 @@ function modalForm() {
 
 				postData(formData).then(() => statusMessage.innerHTML = `<img src="${message.loadind}" />`)
 													.then(() => {statusMessage.innerHTML = `<img src="${message.success}" />`})
-													.catch(() => statusMessage.innerHTML = `<img src="${message.failure}" />`).then(clearInput).then(clearInputFoot);
+													.catch(() => statusMessage.innerHTML = `<img src="${message.failure}" />`).then(() => {
+														setTimeout(() => {
+															statusMessage.innerHTML = '';
+															overlay.style.display = 'none';
+															document.body.style.overflow = '';
+															more.classList.remove('more-splash');
+															clearInput();
+															clearInputFoot();
+														}, 1500);
+													});
 
 			});
 	//Отправка данных на сервер ===================================
@@ -291,8 +300,14 @@ function modalForm() {
 		}
 
 		postData(formData).then(() => statusMessageFoot.innerHTML = `<img src="${message.loadind}" />`)
-			.then(() => statusMessageFoot.innerHTML = '')
-			.catch(() => statusMessageFoot.innerHTML = `<img src="${message.failure}" />`).then(clearInputFoot).then(clearInput);
+			.then(() => statusMessageFoot.innerHTML = `<img src="${message.success}" />`)
+			.catch(() => statusMessageFoot.innerHTML = `<img src="${message.failure}" />`).then(() => {
+				setTimeout(() => {
+					statusMessageFoot.innerHTML = '';
+					clearInput();
+					clearInputFoot();
+				}, 1500);
+			});
 
 	});
 	//Отправка данных на сервер ===================================

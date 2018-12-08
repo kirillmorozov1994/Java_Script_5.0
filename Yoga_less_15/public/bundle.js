@@ -363,7 +363,16 @@ function modalForm() {
       statusMessage.innerHTML = "<img src=\"".concat(message.success, "\" />");
     }).catch(function () {
       return statusMessage.innerHTML = "<img src=\"".concat(message.failure, "\" />");
-    }).then(clearInput).then(clearInputFoot);
+    }).then(function () {
+      setTimeout(function () {
+        statusMessage.innerHTML = '';
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        more.classList.remove('more-splash');
+        clearInput();
+        clearInputFoot();
+      }, 1500);
+    });
   }); //Отправка данных на сервер ===================================
   //Очистка полей инпута при закрытии формы и её отправки
 
@@ -492,10 +501,16 @@ function modalForm() {
     postData(formData).then(function () {
       return statusMessageFoot.innerHTML = "<img src=\"".concat(message.loadind, "\" />");
     }).then(function () {
-      return statusMessageFoot.innerHTML = '';
+      return statusMessageFoot.innerHTML = "<img src=\"".concat(message.success, "\" />");
     }).catch(function () {
       return statusMessageFoot.innerHTML = "<img src=\"".concat(message.failure, "\" />");
-    }).then(clearInputFoot).then(clearInput);
+    }).then(function () {
+      setTimeout(function () {
+        statusMessageFoot.innerHTML = '';
+        clearInput();
+        clearInputFoot();
+      }, 1500);
+    });
   }); //Отправка данных на сервер ===================================
   //Очистка полей инпута при закрытии формы и её отправки
 
