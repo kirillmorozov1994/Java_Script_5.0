@@ -360,7 +360,7 @@ function modalForm() {
     postData(formData).then(function () {
       return statusMessage.innerHTML = "<img src=\"".concat(message.loadind, "\" />");
     }).then(function () {
-      return statusMessage.innerHTML = "";
+      statusMessage.innerHTML = "<img src=\"".concat(message.success, "\" />");
     }).catch(function () {
       return statusMessage.innerHTML = "<img src=\"".concat(message.failure, "\" />");
     }).then(clearInput).then(clearInputFoot);

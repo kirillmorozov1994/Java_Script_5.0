@@ -159,7 +159,7 @@ function modalForm() {
 				}
 
 				postData(formData).then(() => statusMessage.innerHTML = `<img src="${message.loadind}" />`)
-													.then(() => statusMessage.innerHTML = "")
+													.then(() => {statusMessage.innerHTML = `<img src="${message.success}" />`})
 													.catch(() => statusMessage.innerHTML = `<img src="${message.failure}" />`).then(clearInput).then(clearInputFoot);
 
 			});
