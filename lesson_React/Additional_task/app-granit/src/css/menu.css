@@ -1,0 +1,21 @@
+.menu-section {
+	margin-top: -35px;
+	position: relative;
+	z-index: 1;
+} 
+.menu-section_wrap {
+	background: #ffcc00;
+}
+.menu-desc {
+	padding: 25px 0;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 500;
+	color: #000;
+	transition: all 0.5s;
+}
+.menu-desc:hover {
+	cursor: pointer;
+	background: #ffaa11;
+	color: #fff;
+}

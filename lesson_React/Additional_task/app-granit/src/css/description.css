@@ -1,0 +1,52 @@
+.section-description {
+	background: url(../img/bg-main.jpg) no-repeat center;
+	background-size: cover;
+	padding-top: 170px;
+	padding-bottom: 140px;
+	margin-top: -35px;
+	position: relative;
+	z-index: 0;
+}
+.description-title {
+	font-size: 36px;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: 700;
+	padding-bottom: 45px;
+}
+.description-subtitle {
+	font-size: 14px;
+	font-weight: 300;
+	color: #fff;
+	padding-bottom: 65px;
+}
+.description-btn {
+	border: none;
+	background: #ffd200;
+	padding: 20px 30px;
+	font-size: 12px;
+	font-weight: 500;
+	font-family: 'Roboto', sans-serif;
+	vertical-align: middle;
+	transition: all 0.5s;
+}
+.description-btn:hover {
+	cursor: pointer;
+	background: #ffaa11;
+	font-size: 16px;
+	color: #fff;
+}
+.description-catalog {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 30px;
+	color: #fff;
+}
+.description-catalog a {
+	color: #fff;
+	margin-left: 15px;
+}
+.description-catalog a:hover {
+	cursor: pointer;
+	color: #aaaaaa;
+}

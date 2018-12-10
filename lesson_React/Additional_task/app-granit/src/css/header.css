@@ -1,0 +1,54 @@
+.header-section {
+	padding-top: 30px;
+	padding-bottom: 60px;
+}
+.header-section img {
+	width: 40px;
+	vertical-align: middle;
+}
+.logo-desc {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 15px;
+}
+.logo-title {
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 20px;
+	vertical-align: middle;
+	color: #292929;
+}
+.logo-title a {
+	text-decoration: none;
+	color: #292929;
+}
+.logo-title a:hover {
+	color: #969696;
+}
+.logo-subtitle {
+	font-size: 11px;
+	font-weight: 300;
+	color: #969696;
+}
+.conct-desc {
+	display: inline-block;
+	text-align: right;
+	vertical-align: middle;
+	margin-right: 30px;
+}
+.contacts-align {
+	text-align: right;
+}
+.btn-logo {
+	border: 2px solid #292929;
+	background: transparent;
+	font-size: 12px;
+	font-weight: 500;
+	font-family: 'Roboto', sans-serif;
+	padding: 13px 25px;
+	transition: all 0.5s;
+}
+.btn-logo:hover {
+	cursor: pointer;
+	box-shadow: 0 1px 2px 3px #969696;
+}
