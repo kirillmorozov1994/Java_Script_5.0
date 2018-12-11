@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+
+$bg : #2A3436;
+$element: #4D565B;
+$activeBorder: #589CF7;
+$border: 3px;
+
+html,body {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background-color: $bg;
+	font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#line {
+	position: relative;
+	height: $border;
+	width: 250px;
+	background-color: $element;
+	
+	&.right::after {
+		content:'';
+		position: absolute;
+		left: $border;
+		height: 3px;
+		background-color: $activeBorder;
+		animation-name: left-to-right;
+		animation-duration: .4s;
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-in-out;
+	}
+	
+	&.left::after {
+		content:'';
+		position: absolute;
+		right: $border;
+		height: 3px;
+		background-color: $activeBorder;
+		animation-name: right-to-left;
+		animation-duration: .4s;
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-in-out;
+	}
+	
+	@keyframes left-to-right {
+		0% {
+			left:0;
+			width: 0%;
+		}
+		
+		50% {
+			width: 35%;
+		}
+		
+		100% {
+			left: 100%;
+			width: 0%;
+		}
+	}
+	
+	@keyframes right-to-left {
+		0% {
+			right:0;
+			width: 0%;
+		}
+		
+		50% {
+			width: 35%;
+		}
+		
+		100% {
+			right: 100%;
+			width: 0%;
+		}
+	}
+	
+	.circle-right,
+	.circle-left {
+		position: absolute;
+		top: 50%;
+		transform: translate(0, -50%);
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		border: $border solid $element;
+		cursor: pointer;
+		background-color: $bg;
+		transition: all .3s ease;
+		z-index: 5;
+	}
+	
+	.circle-right {
+		right: calc(-15px - #{$border});
+		
+		::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			text-align: center;
+			line-height: 45px;
+			font-size: 1em;
+			color: $bg;
+		}
+		
+		&.active {
+			width: 90px;
+			height: 45px;
+			border-radius: 10px;
+			border-color: $activeBorder;
+			transition: all .3s ease;
+		}
+	
+		&.show::after {
+			content: 'Second';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			text-align: center;
+			line-height: 45px;
+			font-size: 1em;
+			color: #fff;
+		}
+	}
+	
+	.circle-left {
+		left: calc(-15px - #{$border});
+		
+		::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			text-align: center;
+			line-height: 45px;
+			font-size: 1em;
+			color: $bg;
+		}
+		
+		&.active {
+			width: 90px;
+			height: 45px;
+			border-radius: 10px;
+			border-color: $activeBorder;
+			transition: all .3s ease;
+		}
+		
+		&.show::after {
+			content: 'First';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			text-align: center;
+			line-height: 45px;
+			font-size: 1em;
+			color: #fff;
+		}
+	}
+}

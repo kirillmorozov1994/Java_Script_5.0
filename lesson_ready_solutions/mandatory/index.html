@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+    <head>
+			<style>
+				.tabs__content {
+				display: none; /* по умолчанию прячем все блоки */
+				}
+				.tabs__content.active {
+				display: block; /* по умолчанию показываем нужный блок */
+				}
+			</style>
+			<link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+
+		<div class="progress-top"></div>
+		<div class="progress-right"></div>
+		<div class="progress-bottom"></div>
+		<div class="progress-left"></div>
+
+		<div class="tabs">
+
+			<div class="wrapper__tabs">
+				<ul class="tabs__caption">
+					<li class="active">Слайдер</li>
+					<li>Аккордеон</li>
+					<li>Анимация</li>
+					<li>Табы</li>
+				</ul>
+			</div>
+
+			<div class="tabs__content active">
+				<div class="galleria">
+					<img src="https://look.com.ua/pic/201209/1920x1080/look.com.ua-18935.jpg">
+					<img src="https://cdn.wallpapersafari.com/44/43/DSQC6I.jpg">
+					<img src="http://stoloboi.ru/images/cosmos/spac-246.jpg">
+				</div>
+			</div>
+
+			<div class="tabs__content">
+				<div class="all">
+					<input type="checkbox" name="all" id="all" />
+					<label for="all"></label>
+				</div> <!-- .all -->
+
+				<div class="accordion">
+					<div class="trigger">
+						<input type="checkbox" id="checkbox-1" name="checkbox-1" />
+						<label for="checkbox-1" class="checkbox">
+							This is a Test <i></i>
+						</label>
+						<div class="content">
+							<h3>Gary Busey 2020!</h3>
+							<p>The magic Indian is a mysterious spiritual force, and we're going to Cathedral Rock, and that's the vortex of the
+								heart.You ever roasted doughnuts?These kind of things only happen for the first time once.Did you feel that? Look
+								at me - I'm not out of breath anymore!
+
+								<p>When you get lost in your imaginatory vagueness, your foresight will become a nimble vagrant.You ever roasted
+									doughnuts?These kind of things only happen for the first time once.You gotta go through it to see there ain't
+									nothing to it.It's good to yell at people and tell people that you're from Tennesee, so that way you'll be safe.</p>
+
+								<p>The best way to communicate is compatible. Compatible communication is listening with open ears and an open
+									mind, and not being fearful or judgemental about what you're hearing.Did you feel that? Look at me - I'm not out
+									of breath anymore!These kind of things only happen for the first time once.</p>
+						</div>
+					</div>
+
+					<div class="trigger">
+						<input type="checkbox" id="checkbox-2" name="checkbox-2" />
+						<label for="checkbox-2" class="checkbox">
+							This is a Test <i></i>
+						</label>
+						<div class="content">
+							<h3>Gary Busey 2020!</h3>
+							<p>The magic Indian is a mysterious spiritual force, and we're going to Cathedral Rock, and that's the vortex of the
+								heart.You ever roasted doughnuts?These kind of things only happen for the first time once.Did you feel that? Look
+								at me - I'm not out of breath anymore!
+
+								<p>When you get lost in your imaginatory vagueness, your foresight will become a nimble vagrant.You ever roasted
+									doughnuts?These kind of things only happen for the first time once.You gotta go through it to see there ain't
+									nothing to it.It's good to yell at people and tell people that you're from Tennesee, so that way you'll be safe.</p>
+
+								<p>The best way to communicate is compatible. Compatible communication is listening with open ears and an open
+									mind, and not being fearful or judgemental about what you're hearing.Did you feel that? Look at me - I'm not out
+									of breath anymore!These kind of things only happen for the first time once.</p>
+						</div>
+					</div>
+
+					<div class="trigger">
+						<input type="checkbox" id="checkbox-3" name="checkbox-3" />
+						<label for="checkbox-3" class="checkbox">
+							This is a Test <i></i>
+						</label>
+						<div class="content">
+							<h3>Gary Busey 2020!</h3>
+							<p>The magic Indian is a mysterious spiritual force, and we're going to Cathedral Rock, and that's the vortex of the
+								heart.You ever roasted doughnuts?These kind of things only happen for the first time once.Did you feel that? Look
+								at me - I'm not out of breath anymore!
+
+								<p>When you get lost in your imaginatory vagueness, your foresight will become a nimble vagrant.You ever roasted
+									doughnuts?These kind of things only happen for the first time once.You gotta go through it to see there ain't
+									nothing to it.It's good to yell at people and tell people that you're from Tennesee, so that way you'll be safe.</p>
+
+								<p>The best way to communicate is compatible. Compatible communication is listening with open ears and an open
+									mind, and not being fearful or judgemental about what you're hearing.Did you feel that? Look at me - I'm not out
+									of breath anymore!These kind of things only happen for the first time once.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tabs__content">
+				<section id="my-section">
+					<div class="active" id="wrap-cta">
+						<button id="cta">Click here, please!</button>
+					</div>
+					<svg viewBox="0 0 215 110" preserveAspectRatio="none">
+						<polygon class="polymorph" points="215,110 0,110 0,0 215,0"></polygon>
+					</svg>
+					<div class="container">
+						<div id="content">
+							<h1>Lorem ipsum dolor sit amet</h1>
+							<p>Dolor sit amet et consectquo lorem ipsum dolor sit amet</p>
+							<button id="close">Ok, close me</button>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<div class="tabs__content">
+				<div class="wrapper">
+						<div id="line" class="left">
+							<div class="circle-right" id="rightHandle"></div>
+						<div class="circle-left active show" id="leftHandle"></div>
+					</div>
+				</div>
+			</div>
+
+		</div><!-- .tabs-->
+
+				<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+				<script src="galleria/galleria-1.5.7.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+        <script>
+	(function() { 
+            Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
+						Galleria.configure({
+							transition: 'pulse',
+							imageCrop: true,
+							height: 880,
+							width: 1910,
+							lightbox: true
+						});
+            Galleria.run('.galleria', {
+							autoplay: 1500
+						});
+        }());
+				</script>
+				<script>
+					(function($) {
+						$(function() {
+							$('ul.tabs__caption').on('click', 'li:not(.active)', function() {
+								$(this)
+									.addClass('active').siblings().removeClass('active')
+									.closest('div.tabs').find('div.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
+							});
+
+						});
+					})(jQuery);
+				</script>
+				<script>
+										// Progress Scroll
+					const ProgressScroll = (() => {
+						let s;
+
+						return {
+							settings() {
+								return {
+									top: $('.progress-top'),
+									right: $('.progress-right'),
+									bottom: $('.progress-bottom'),
+									left: $('.progress-left'),
+									windowHeight: $(window).height(),
+									windowWidth: $(window).width(),
+									scrollHeight: $(document).height() - $(window).height(),
+									progressTotal: $(window).height() * 2 + $(window).width() * 2,
+									scrollPosition: $(document).scrollTop()
+								};
+							},
+
+							init() {
+								s = this.settings();
+								this.bindEvents();
+							},
+
+							bindEvents() {
+								$(window).on('scroll', this.onScroll);
+								$(window).on('resize', this.onResize);
+
+								this.progress();
+							},
+
+							onScroll() {
+								s.scrollPosition = $(document).scrollTop();
+
+								ProgressScroll.requestTick();
+							},
+
+							onResize() {
+								s.windowHeight = $(window).height();
+								s.windowWidth = $(window).width();
+								s.scrollHeight = $(document).height() - s.windowHeight;
+								s.progressTotal = s.windowHeight * 2 + s.windowWidth * 2;
+
+								ProgressScroll.requestTick();
+							},
+
+							requestTick() {
+								requestAnimationFrame(this.progress);
+							},
+
+							progress() {
+								const percentage = s.scrollPosition / s.scrollHeight;
+								const width = s.windowWidth / s.progressTotal;
+								const height = s.windowHeight / s.progressTotal;
+
+								s.top.css('width', `${(percentage / width) * 100}%`);
+								s.right.css('height', `${((percentage - width) / height) * 100}%`);
+								s.bottom.css('width', `${((percentage - width - height) / width) * 100}%`);
+								s.left.css('height', `${((percentage - width - height - width) / height) * 100}%`);
+							}
+						};
+					})();
+
+					// Init
+					$(() => {
+						ProgressScroll.init();
+					});
+				</script>
+				<script>
+					$("#all").click(function () {
+					$('input:checkbox').not(this).prop('checked', this.checked);
+					});
+				</script>
+				<script>
+					const wrapCta  = document.querySelector('#wrap-cta'),
+								btnCta   = document.querySelector('#cta'),
+								content  = document.querySelector('#content'),
+								btnClose = document.querySelector('#close');
+
+
+					// Anime.js Commons Values for SVG Morph
+					const common = {
+						targets: '.polymorph',
+						easing: 'easeOutQuad',
+						duration: 600,
+						loop: false
+					};
+
+
+					// Show content
+					btnCta.addEventListener('click', () => {
+						// Elements apparence
+						wrapCta.classList.remove('active');
+						content.classList.add('active');
+						
+						// Morph SVG
+						anime({
+							...common,
+							points: [
+								{ value: '215,110 0,110 186,86 215,0' }
+							],
+						});
+					});
+
+
+					// Hide content  
+					btnClose.addEventListener('click', () => {
+						// Elements apparence
+						content.classList.remove('active');
+						wrapCta.classList.add('active');
+						
+						// Morph SVG
+						anime({
+							...common,
+							points: [
+								{ value: '215,110 0,110 0,0 215,0' }
+							]
+						}); 
+					});
+				</script>
+				<script>
+					const line = document.getElementById('line');
+					const rightHandle = document.getElementById('rightHandle');
+					const leftHandle = document.getElementById('leftHandle');
+
+					rightHandle.addEventListener('click', (e) => {
+						
+						line.classList.remove('left');
+						line.classList.add('right');
+						
+							if(!e.target.classList.contains('active')){
+								leftHandle.classList.remove('active','show');
+								
+								setTimeout( () =>{
+									e.target.classList.add('active');
+								},300);
+								
+								setTimeout( () =>{
+									e.target.classList.add('show');
+								},600);
+								
+							}
+					});
+
+					leftHandle.addEventListener('click', (e) => {
+						
+						line.classList.remove('right');
+						line.classList.add('left');
+						
+							if(!e.target.classList.contains('active')){
+								
+								rightHandle.classList.remove('active','show');
+								
+								setTimeout( () =>{
+									e.target.classList.add('active');
+								},300);
+								
+								setTimeout( () =>{
+									e.target.classList.add('show');
+								},600);
+								
+							}
+					});
+				</script>
+    </body>
+</html>

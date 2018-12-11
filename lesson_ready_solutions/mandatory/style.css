@@ -1,0 +1,471 @@
+.progress-top,
+.progress-right,
+.progress-bottom,
+.progress-left {
+	position: fixed;
+	z-index: 999;
+
+	background-color: red;
+}
+
+.progress-top,
+.progress-bottom {
+	height: 0.35rem;
+}
+
+.progress-right,
+.progress-left {
+	width: 0.35rem;
+}
+
+.progress-top,
+.progress-right {
+	top: 0;
+}
+
+.progress-top,
+.progress-left {
+	left: 0;
+}
+
+.progress-bottom,
+.progress-left {
+	bottom: 0;
+}
+
+.progress-bottom,
+.progress-right {
+	right: 0;
+}
+.wrapper__tabs {
+	background: #2980b9;
+	margin: 0;
+}
+ul.tabs__caption {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+}
+ul.tabs__caption li{
+	padding: 20px 20px;
+}
+ul.tabs__caption li:hover {
+	cursor: pointer;
+	background: #0652f5;
+	color: #fff;
+}
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	margin: 50px 0 20px;
+	font-weight: 100;
+	text-align: center;
+}
+
+.all {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.all input[type="checkbox"] {
+	display: none;
+}
+
+.all input[type="checkbox"]:checked+label {
+	background-color: #2980b9;
+	color: white;
+}
+
+.all input[type="checkbox"]:checked+label:before {
+	content: 'Close All';
+}
+
+.all label {
+	position: relative;
+	margin: 0;
+	padding: 5px 30px;
+	font-size: 14px;
+	font-weight: 300;
+	color: #2980b9;
+	background-color: white;
+	border: 1px solid #2980b9;
+	border-radius: 99px;
+}
+
+.all label:before {
+	content: 'Open All';
+}
+
+.accordion {
+	position: relative;
+	width: 80%;
+	margin: 50px auto;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.accordion .trigger #checkbox-1,
+.accordion .trigger #checkbox-2,
+.accordion .trigger #checkbox-3 {
+	display: none;
+}
+
+.accordion .trigger #checkbox-1:checked+label,
+.accordion .trigger #checkbox-2:checked+label,
+.accordion .trigger #checkbox-3:checked+label {
+	background-color: slategray;
+}
+
+.accordion .trigger #checkbox-1:checked+label i:before,
+.accordion .trigger #checkbox-2:checked+label i:before,
+.accordion .trigger #checkbox-3:checked+label i:before {
+	transform: translate(5px, 8px) rotate(45deg);
+}
+
+.accordion .trigger #checkbox-1:checked+label i:after,
+.accordion .trigger #checkbox-2:checked+label i:after,
+.accordion .trigger #checkbox-3:checked+label i:after {
+	transform: translate(-5px, 8px) rotate(-45deg);
+}
+
+.accordion .trigger .checkbox {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 20px;
+	color: white;
+	cursor: pointer;
+	background-color: #434d57;
+}
+
+.accordion .trigger .checkbox i {
+	position: absolute;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	right: 20px;
+}
+
+.accordion .trigger .checkbox i:before,
+.accordion .trigger .checkbox i:after {
+	position: absolute;
+	content: '';
+	width: 16px;
+	height: 3px;
+	background-color: white;
+	transition: transform 250ms ease;
+}
+
+.accordion .trigger .checkbox i:before {
+	transform: translate(-5px, 8px) rotate(45deg);
+}
+
+.accordion .trigger .checkbox i:after {
+	transform: translate(5px, 8px) rotate(-45deg);
+}
+
+.accordion .trigger .content {
+	position: relative;
+	max-height: 1px;
+	padding: 0;
+	overflow-y: scroll;
+	font-size: 14px;
+	line-height: 1.5;
+	background-color: whitesmoke;
+	transition: max-height 500ms ease-in-out;
+}
+
+.accordion .trigger .content h3 {
+	margin: 30px 0 15px 30px;
+}
+
+.accordion .trigger .content p {
+	margin: 0 30px 30px;
+}
+
+#checkbox-1:checked~.content,
+#checkbox-2:checked~.content,
+#checkbox-3:checked~.content {
+	max-height: 350px;
+	transition: max-height 500ms ease-in-out;
+}
+@import url("https://fonts.googleapis.com/css?family=Merriweather:400,400i,700");
+
+body {
+	font-family: Merriweather;
+	font-size: 16px;
+}
+
+#my-section {
+	position: relative;
+}
+
+#wrap-cta {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	opacity: 0;
+}
+
+#wrap-cta.active {
+	z-index: 2;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	transition: opacity .6s, -webkit-transform .6s;
+	transition: transform .6s, opacity .6s;
+	transition: transform .6s, opacity .6s, -webkit-transform .6s;
+	opacity: 1;
+}
+
+#wrap-cta #cta {
+	padding: 1rem 2rem;
+	text-transform: uppercase;
+	color: #f2f2f2;
+	background: transparent;
+	border: 2px solid;
+	border-radius: 5px;
+	cursor: pointer;
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+	transition: background .4s;
+}
+
+#wrap-cta #cta:hover {
+	background: rgba(242, 242, 242, 0.1);
+}
+
+svg {
+	display: block;
+	width: 100%;
+	height: 100vh;
+}
+
+svg .polymorph {
+	fill: #B66C8D;
+}
+
+.container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.container #content {
+	-webkit-transform: translateY(-50px);
+	transform: translateY(-50px);
+	opacity: 0;
+	color: #B66C8D;
+	transition: opacity .6s .2s, -webkit-transform .6s .2s;
+	transition: transform .6s .2s, opacity .6s .2s;
+	transition: transform .6s .2s, opacity .6s .2s, -webkit-transform .6s .2s;
+}
+
+.container #content #close {
+	display: inline-block;
+	margin-top: 2rem;
+	padding: .5rem 1rem;
+	text-transform: uppercase;
+	font-size: .9em;
+	color: #B66C8D;
+	background: transparent;
+	border: 2px solid;
+	border-radius: 5px;
+	cursor: pointer;
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+	transition: background .4s;
+}
+
+.container #content #close:hover {
+	background: rgba(182, 108, 141, 0.3);
+}
+
+.container #content.active {
+	z-index: 4;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+	opacity: 1;
+}
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+
+.wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background-color: #2A3436;
+	font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#line {
+	position: relative;
+	height: 3px;
+	width: 250px;
+	background-color: #4D565B;
+}
+
+#line.right::after {
+	content: '';
+	position: absolute;
+	left: 3px;
+	height: 3px;
+	background-color: #589CF7;
+	animation-name: left-to-right;
+	animation-duration: .4s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-in-out;
+}
+
+#line.left::after {
+	content: '';
+	position: absolute;
+	right: 3px;
+	height: 3px;
+	background-color: #589CF7;
+	animation-name: right-to-left;
+	animation-duration: .4s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes left-to-right {
+	0% {
+		left: 0;
+		width: 0%;
+	}
+
+	50% {
+		width: 35%;
+	}
+
+	100% {
+		left: 100%;
+		width: 0%;
+	}
+}
+
+@keyframes right-to-left {
+	0% {
+		right: 0;
+		width: 0%;
+	}
+
+	50% {
+		width: 35%;
+	}
+
+	100% {
+		right: 100%;
+		width: 0%;
+	}
+}
+
+#line .circle-right,
+#line .circle-left {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	border: 3px solid #4D565B;
+	cursor: pointer;
+	background-color: #2A3436;
+	transition: all .3s ease;
+	z-index: 5;
+}
+
+#line .circle-right {
+	right: calc(-15px - 3px);
+}
+
+#line .circle-right ::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	line-height: 45px;
+	font-size: 1em;
+	color: #2A3436;
+}
+
+#line .circle-right.active {
+	width: 90px;
+	height: 45px;
+	border-radius: 10px;
+	border-color: #589CF7;
+	transition: all .3s ease;
+}
+
+#line .circle-right.show::after {
+	content: 'Second';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	line-height: 45px;
+	font-size: 1em;
+	color: #fff;
+}
+
+#line .circle-left {
+	left: calc(-15px - 3px);
+}
+
+#line .circle-left ::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	line-height: 45px;
+	font-size: 1em;
+	color: #2A3436;
+}
+
+#line .circle-left.active {
+	width: 90px;
+	height: 45px;
+	border-radius: 10px;
+	border-color: #589CF7;
+	transition: all .3s ease;
+}
+
+#line .circle-left.show::after {
+	content: 'First';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	line-height: 45px;
+	font-size: 1em;
+	color: #fff;
+}
+
