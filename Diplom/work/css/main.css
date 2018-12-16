@@ -537,7 +537,7 @@ h4 {
   width: 100%;
   text-align: center;
   position: relative;
-  z-index: -1000;
+  z-index: 0;
 }
 .calc .button-order {
   margin-top: 6rem;
@@ -957,7 +957,8 @@ h4 {
 .consultation .input-wrapper {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+	flex-wrap: wrap;
+	position: relative;
 }
 .consultation input {
   width: 30%;
@@ -1729,17 +1730,135 @@ h4 {
 }
 .status {
 	position: absolute;
-	top: 90px;
+	top: 0;
 	left: 0;
-	width: 350px;
-	height: 350px;
+	right: 0;
+	bottom: 0;
+	background-color: #FFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
 }
 .status img {
-	width: 100%;
+	width: 250px;
+}
+.status h4 {
+	margin: 0;
 }
 .novalidate {
 	color: red;
 }
 .validate {
 	color: green;
+}
+.active-accordion {
+	color:#a12ab1;
+}
+.validate-input_position__name {
+	position: absolute;
+	top: 55px;
+	left: 114px;
+}
+.novalidate-input_position__name {
+	position: absolute;
+	top: 55px;
+	left: 35px;
+}
+.validate-input_position__phone {
+	position: absolute;
+	top: 55px;
+	left: 442px;
+}
+.novalidate-input_position__phone {
+	position: absolute;
+	top: 55px;
+	left: 348px;
+}
+.validate-input_position__mail {
+	position: absolute;
+	top: 55px;
+	left: 760px;
+}
+.novalidate-input_position__mail {
+	position: absolute;
+	top: 55px;
+	left: 668px;
+}
+@media (max-width: 1200px) {
+	.validate-input_position__name {
+		left: 91px;
+	}
+	.novalidate-input_position__name {
+		left: 5px;
+	}
+	.validate-input_position__phone {
+		left: 358px;
+	}
+	.novalidate-input_position__phone {
+		left: 270px;
+	}
+	.validate-input_position__mail {
+		left: 620px;
+	}
+	.novalidate-input_position__mail {
+		left: 521px;
+	}
+}
+@media (max-width: 991px) {
+	.validate-input_position__name {
+		left: 91px;
+		font-size: 12px;
+	}
+	.novalidate-input_position__name {
+		left: 8px;
+		font-size: 12px;
+	}
+	.validate-input_position__phone {
+		left: 327px;
+		font-size: 12px;
+	}
+	.novalidate-input_position__phone {
+		left: 250px;
+		font-size: 12px;
+	}
+	.validate-input_position__mail {
+		left: 568px;
+		font-size: 12px;
+	}
+	.novalidate-input_position__mail {
+		left: 489px;
+		font-size: 12px;
+	}
+}
+@media (max-width: 767px) {
+	.validate-input_position__name {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.novalidate-input_position__name {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.validate-input_position__phone {
+		top: 133px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.novalidate-input_position__phone {
+		top: 133px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.validate-input_position__mail {
+		top: 215px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.novalidate-input_position__mail {
+		top: 215px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 }

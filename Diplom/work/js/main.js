@@ -46,6 +46,8 @@ window.addEventListener('DOMContentLoaded', function () {
 	//Слайдер главного экрана ==================================================
 
 
+
+
 	//Модальное окно design ====================================================
 
 		let popupDesign = document.querySelector('.popup-design');
@@ -61,13 +63,17 @@ window.addEventListener('DOMContentLoaded', function () {
 					popupDesign.style.display = 'none';
 					inputFormsDesign[1].style.marginBottom = '15px';
 					inputFormsDesign[2].style.marginBottom = '15px';
+					inputFormsDesign[3].style.marginBottom = '15px';
 					mesStatusName.innerHTML = '';
 					mesStatusPhone.innerHTML = '';
+					mesStatusMail.innerHTML = '';
 					fileImg.children[1].innerText = 'Файл не выбран';
 					fileImg.children[1].classList.remove('novalidate');
 					fileImg.children[1].classList.remove('validate');
 					clearInputs();
 					clearTextAreas();
+					clearFormCalculation();
+					clearFormFooter();
 				}
 		
 				document.body.addEventListener('click', function (event) {
@@ -104,6 +110,8 @@ window.addEventListener('DOMContentLoaded', function () {
 					inputFormsformsConsultation[1].style.marginBottom = '15px';
 					mesStatusNameCons.innerHTML = '';
 					mesStatusPhoneCons.innerHTML = '';
+					clearFormCalculation();
+					clearFormFooter();
 				}
 				document.body.addEventListener('click', function (event) {
 					if (event.target && event.target.classList.contains('button-consultation')) {
@@ -165,8 +173,9 @@ window.addEventListener('DOMContentLoaded', function () {
 	//Появление модального окна, если не нажата ни одна кнопка =====================
 
 				window.addEventListener('scroll', function () {
-					if (window.pageYOffset == 13585 && getComputedStyle(popupGift).display == 'none' && getComputedStyle(popupConsultation).display == 'none' && getComputedStyle(popupDesign).display == 'none' && tracking == 0) {
+					if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight && getComputedStyle(popupGift).display == 'none' && getComputedStyle(popupConsultation).display == 'none' && getComputedStyle(popupDesign).display == 'none' && tracking == 0) {
 						showPopupGift();
+						tracking++;
 					}
 				});			
 
@@ -215,26 +224,13 @@ window.addEventListener('DOMContentLoaded', function () {
 							if(t.value.length < 3) {
 								t.style.marginBottom = 0;
 								mesStatusName.classList.remove('validate');
-								mesStatusNameCons.classList.remove('validate');
-
 								mesStatusName.classList.add('novalidate');
-								mesStatusNameCons.classList.add('novalidate');
-
 								mesStatusName.innerHTML = 'Имя должно быть не менее 3 букв';
-								mesStatusNameCons.innerHTML = 'Имя должно быть не менее 3 букв';
-
 							} else {
 								t.style.marginBottom = 0;
-
 								mesStatusName.classList.remove('novalidate');
-								mesStatusNameCons.classList.remove('novalidate');
-
 								mesStatusName.classList.add('validate');
-								mesStatusNameCons.classList.add('validate');
-
-								mesStatusName.innerHTML = 'Готово';
-								mesStatusNameCons.innerHTML = 'Готово';
-								
+								mesStatusName.innerHTML = 'Готово';	
 							}
 						}
 						//Валидация имени пользователя
@@ -248,25 +244,13 @@ window.addEventListener('DOMContentLoaded', function () {
 							if (t.value.lastIndexOf('_') != -1 || t.value == '') {
 								t.style.marginBottom = 0;
 								mesStatusPhone.classList.remove('validate');
-								mesStatusPhoneCons.classList.remove('validate');
-
 								mesStatusPhone.classList.add('novalidate');
-								mesStatusPhoneCons.classList.add('novalidate');
-
 								mesStatusPhone.innerHTML = 'Заполните маску номера телефона';
-								mesStatusPhoneCons.innerHTML = 'Заполните маску номера телефона';
-
 							} else {
 								t.style.marginBottom = 0;
 								mesStatusPhone.classList.remove('novalidate');
-								mesStatusPhoneCons.classList.remove('novalidate');
-
 								mesStatusPhone.classList.add('validate');
-								mesStatusPhoneCons.classList.add('validate');
-
 								mesStatusPhone.innerHTML = 'Готово';
-								mesStatusPhoneCons.innerHTML = 'Готово';
-
 							}
 						}
 						//Валидация номера телефона
@@ -317,6 +301,28 @@ window.addEventListener('DOMContentLoaded', function () {
 						}
 						//Функция маски номера телефона
 
+						//Валидация почты
+							let mesStatusMail = document.createElement('div');
+									document.querySelectorAll('.form')[2].appendChild(mesStatusMail);
+									document.querySelectorAll('.form')[2].insertBefore(mesStatusMail, textAreas[0]);
+
+							function validateInputMail(t) {
+								let pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+										if (!pattern.test(t.value)) {
+											t.style.marginBottom = 0;
+											mesStatusMail.classList.remove('validate');
+											mesStatusMail.classList.add('novalidate');
+											mesStatusMail.innerHTML = 'Введите корректный почтовый адрес';
+										} else {
+											t.style.marginBottom = 0;
+											mesStatusMail.classList.remove('novalidate');
+											mesStatusMail.classList.add('validate');
+											mesStatusMail.innerHTML = 'Готово';
+										}
+							}		
+						//Валидация почты
+						
+
 						//Функция отправки формы
 						function sendingForms (t) {
 							
@@ -339,22 +345,24 @@ window.addEventListener('DOMContentLoaded', function () {
 							request.addEventListener('readystatechange', function () {
 								t.appendChild(messageStatus);
 								if (request.readyState < 4) {
-									messageStatus.innerHTML = `<img src="${message.loadind}" />`;
+									messageStatus.innerHTML = `<img src="${message.loadind}" /> <h4>Идёт загрузка ...</h4>`;
 								} else if (request.readyState === 4 && request.status == 200) {
 									messageStatus.style.cssText = 'z-index: 10';
-									messageStatus.innerHTML = `<img src="${message.success}" />`;
+									messageStatus.innerHTML = `<img src="${message.success}" /> <h4>Спасибо Вам за пользование нашими услугами!</h4>`;
 									messageStatus.style.cssText = 'animation-duration: 1s';
 								} else {
 									messageStatus.style.cssText = 'z-index: 10';
-									messageStatus.innerHTML = `<img src="${message.failure}" />`
+									messageStatus.innerHTML = `<img src="${message.failure}" /> <h4>Произошла непредвиденная ошибка</h4>`;
 									messageStatus.style.cssText = 'animation-duration: 1s';
 								}
 								setTimeout(() => {
 									messageStatus.innerHTML = '';
-									messageStatus.style.cssText = 'z-index: -1';
+									messageStatus.style.cssText = 'z-index: -1; opacity: 0;';
 									closePopupDesign();
 									closePopupConsultation();
-								}, 2000);
+									clearFormCalculation();
+									clearFormFooter();
+								}, 2500);
 							});
 						}
 						//Функция отправки формы
@@ -374,10 +382,11 @@ window.addEventListener('DOMContentLoaded', function () {
 						//Событие submit при отправки формы
 						formsDesign.addEventListener('submit', function (event) {
 							event.preventDefault();
-							if (fileImg.children[2].value == "" || inputFormsDesign[1].value.length < 3 || inputFormsDesign[2].value.lastIndexOf('_') != -1) {
+							if (fileImg.children[2].value == "" || inputFormsDesign[1].value.length < 3 || inputFormsDesign[2].value.lastIndexOf('_') != -1 || !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(inputFormsDesign[3].value)) {
 								validateInputImg(inputFormsDesign[0]);
 								validateInputName(inputFormsDesign[1]);
 								validateInputPhone(inputFormsDesign[2]);
+								validateInputMail(inputFormsDesign[3]);
 							} else {
 								sendingForms(event.target);
 							}
@@ -409,6 +418,12 @@ window.addEventListener('DOMContentLoaded', function () {
 						});
 						//Событие интуп поля номера телефона
 
+						//Событие интуп поля с почтой
+						inputFormsDesign[3].addEventListener('input', function (event) {
+							validateInputMail(event.target);
+						});
+						//Событие интуп поля с почтой
+
 						//Валидация комментария
 						textAreas[0].onkeypress = (event) => {
 							let pattern = /[^а-яА-я]/ig;
@@ -433,20 +448,48 @@ window.addEventListener('DOMContentLoaded', function () {
 			let mesStatusNameCons = document.createElement('div');
 					formsConsultation.appendChild(mesStatusNameCons);
 					formsConsultation.insertBefore(mesStatusNameCons, inputFormsformsConsultation[1]);
+
+					function validateInputNameCons(t) {
+						if (t.value.length < 3) {
+							t.style.marginBottom = 0;
+							mesStatusNameCons.classList.remove('validate');
+							mesStatusNameCons.classList.add('novalidate');
+							mesStatusNameCons.innerHTML = 'Имя должно быть не менее 3 букв';
+						} else {
+							t.style.marginBottom = 0;
+							mesStatusNameCons.classList.remove('novalidate');
+							mesStatusNameCons.classList.add('validate');
+							mesStatusNameCons.innerHTML = 'Готово';
+						}
+					}
 			//Валидация имени пользователя
 
 			//Валидация номера телефона
 			let mesStatusPhoneCons = document.createElement('div');
 					formsConsultation.appendChild(mesStatusPhoneCons);
 					formsConsultation.insertBefore(mesStatusPhoneCons, formsConsultation.children[3]);
+
+					function validateInputPhoneCons(t) {
+						if (t.value.lastIndexOf('_') != -1 || t.value == '') {
+							t.style.marginBottom = 0;
+							mesStatusPhoneCons.classList.remove('validate');
+							mesStatusPhoneCons.classList.add('novalidate');
+							mesStatusPhoneCons.innerHTML = 'Заполните маску номера телефона';
+						} else {
+							t.style.marginBottom = 0;
+							mesStatusPhoneCons.classList.remove('novalidate');
+							mesStatusPhoneCons.classList.add('validate');
+							mesStatusPhoneCons.innerHTML = 'Готово';
+						}
+					}
 			//Валидация номера телефона
 
 			//Событие submit при отправки формы
 			formsConsultation.addEventListener('submit', function (event) {
 				event.preventDefault();
 				if (inputFormsformsConsultation[0].value.length < 3 || inputFormsformsConsultation[1].value.lastIndexOf('_') != -1) {
-					validateInputName(inputFormsformsConsultation[0]);
-					validateInputPhone(inputFormsformsConsultation[1]);
+					validateInputNameCons(inputFormsformsConsultation[0]);
+					validateInputPhoneCons(inputFormsformsConsultation[1]);
 				} else {
 					sendingForms(event.target);
 				}
@@ -455,7 +498,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 			//Событие инпут поля имени
 			inputFormsformsConsultation[0].addEventListener('input', function (event) {
-				validateInputName(event.target);
+				validateInputNameCons(event.target);
 			});
 			inputFormsformsConsultation[0].onkeypress = (event) => {
 				let pattern = /[^а-яА-я]/ig;
@@ -468,14 +511,404 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие интуп поля номера телефона
 			inputFormsformsConsultation[1].addEventListener('input', function (event) {
 				maskInput(event.target);
-				validateInputPhone(event.target);
+				validateInputPhoneCons(event.target);
 			});
 			//Событие интуп поля номера телефона
 
 		//Форма "Остались вопросы" =======================================
 
-
 	//Формы отправки ===============================================================
+
+
+	//Калькулятор ==================================================================
+
+		let selectSize = document.querySelector('#size'),
+				selectMaterial = document.querySelector('#material'),
+				selectOptions = document.querySelector('#options'),
+				inputPromoCode = document.querySelector('.promocode'),
+				imgFileUpload = document.querySelector('.file_upload'),
+				calcPrice = document.querySelector('.calc-price'),
+				summPrice = 0;
+
+				function validateSelectSize(a) {
+					if (a.options[a.selectedIndex].value != 0 && selectMaterial.options[selectMaterial.selectedIndex].value == 0) {
+						calcPrice.classList.remove('validate');
+						calcPrice.classList.add('novalidate');
+						calcPrice.innerHTML = 'Выберите материал картинки';
+					} else if (a.options[a.selectedIndex].value == 0 && selectMaterial.options[selectMaterial.selectedIndex].value != 0) {
+						calcPrice.classList.remove('validate');
+						calcPrice.classList.add('novalidate');
+						calcPrice.innerHTML = 'Выберите размер картинки';
+					} else if (a.options[a.selectedIndex].value != 0 && selectMaterial.options[selectMaterial.selectedIndex].value != 0) {
+						let promCode;
+							if (/IWANTPOPART/i.test(inputPromoCode.value)) {
+								promCode = 70;
+							} else {
+								promCode = 100;
+							}
+						summPrice = (((+a.options[a.selectedIndex].value * +selectMaterial.options[selectMaterial.selectedIndex].value) * +selectOptions.options[selectOptions.selectedIndex].value) / 100) * promCode;
+						calcPrice.classList.remove('novalidate');
+						calcPrice.classList.add('validate');
+						calcPrice.innerHTML = `Стоимость вашего фото: ${Math.round(summPrice)} рублей`;
+					} else if (a.options[a.selectedIndex].value == 0 && selectMaterial.options[selectMaterial.selectedIndex].value == 0) {
+						calcPrice.classList.remove('validate');
+						calcPrice.classList.add('novalidate');
+						calcPrice.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+					}
+				}
+
+				function validateSelectMateriale(a) {
+					if (a.options[a.selectedIndex].value != 0 && selectSize.options[selectSize.selectedIndex].value == 0) {
+						calcPrice.classList.remove('validate');
+						calcPrice.classList.add('novalidate');
+						calcPrice.innerHTML = 'Выберите размер картинки';
+					} else if (a.options[a.selectedIndex].value == 0 && selectSize.options[selectSize.selectedIndex].value != 0) {
+						calcPrice.classList.remove('validate');
+						calcPrice.classList.add('novalidate');
+						calcPrice.innerHTML = 'Выберите материал картинки';
+					}	else if (a.options[a.selectedIndex].value != 0 && selectSize.options[selectSize.selectedIndex].value != 0) {
+						let promCode;
+							if (/IWANTPOPART/i.test(inputPromoCode.value)) {
+								promCode = 70;
+							} else {
+								promCode = 100;
+							}
+						summPrice = (((+a.options[a.selectedIndex].value * +selectSize.options[selectSize.selectedIndex].value) * +selectOptions.options[selectOptions.selectedIndex].value) / 100) * promCode;
+						calcPrice.classList.remove('novalidate');
+						calcPrice.classList.add('validate');
+						calcPrice.innerHTML = `Стоимость вашего фото: ${Math.round(summPrice)} рублей`;
+					} else if (a.options[a.selectedIndex].value == 0 && selectSize.options[selectSize.selectedIndex].value == 0) {
+						calcPrice.classList.remove('validate');
+						calcPrice.classList.add('novalidate');
+						calcPrice.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+					}
+				}
+
+				function validateSelectOptions (a) {
+					if (selectSize.options[selectSize.selectedIndex].value != 0 && selectMaterial.options[selectMaterial.selectedIndex].value != 0) {
+						let promCode;
+						if (/IWANTPOPART/i.test(inputPromoCode.value)) {
+							promCode = 70;
+						} else {
+							promCode = 100;
+						}
+						summPrice = (((+selectMaterial.options[selectMaterial.selectedIndex].value * +selectSize.options[selectSize.selectedIndex].value) * +a.options[a.selectedIndex].value) / 100) * promCode;
+						calcPrice.classList.remove('novalidate');
+						calcPrice.classList.add('validate');
+						calcPrice.innerHTML = `Стоимость вашего фото: ${Math.round(summPrice)} рублей`;
+					}
+				}
+
+				function validatePromoCode(a) {
+					let pattern = /IWANTPOPART/i;
+						if(pattern.test(a.value)) {
+							summPrice = (((+selectMaterial.options[selectMaterial.selectedIndex].value * +selectSize.options[selectSize.selectedIndex].value) * +selectOptions.options[selectOptions.selectedIndex].value)/100) * 70;
+							calcPrice.classList.remove('novalidate');
+							calcPrice.classList.add('validate');
+							calcPrice.innerHTML = `Стоимость вашего фото: ${Math.round(summPrice)} рублей`;
+						} else {
+							summPrice = ((+selectMaterial.options[selectMaterial.selectedIndex].value * +selectSize.options[selectSize.selectedIndex].value) * +selectOptions.options[selectOptions.selectedIndex].value);
+							calcPrice.classList.remove('novalidate');
+							calcPrice.classList.add('validate');
+							calcPrice.innerHTML = `Стоимость вашего фото: ${Math.round(summPrice)} рублей`;
+						}
+				}
+
+				selectSize.addEventListener('change', function (event) {
+					validateSelectSize(event.target);
+				});
+
+				selectMaterial.addEventListener('change', function (event) {
+					validateSelectMateriale(event.target);
+				});
+
+				selectOptions.addEventListener('change', function (event) {
+					validateSelectOptions(event.target);
+				});
+
+				inputPromoCode.addEventListener('input', function (event) {
+					validatePromoCode(event.target);
+				});
+
+		//Форма с калькулятором =======================================
+			
+			let formCalculation = document.querySelector('.form-calc');
+ 
+			//Валидация загрузки изображения
+			function validateInputImgCalc(t) {
+				if (!t.value == "") {
+					imgFileUpload.children[1].classList.remove('novalidate');
+					imgFileUpload.children[1].classList.add('validate');
+					imgFileUpload.children[1].innerText = 'Файл загружен';
+				} else {
+					imgFileUpload.children[1].classList.remove('validate');
+					imgFileUpload.children[1].classList.add('novalidate');
+				}
+			}
+			//Валидация загрузки изображения
+
+			//Очистка формы после отправки
+			function clearFormCalculation() {
+				imgFileUpload.children[1].classList.remove('validate');
+				imgFileUpload.children[1].classList.remove('novalidate');
+				imgFileUpload.children[1].innerText = 'Файл не выбран';
+				calcPrice.classList.remove('validate');
+				calcPrice.classList.remove('novalidate');
+				calcPrice.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+				selectSize[0].selected = true;
+				selectMaterial[0].selected = true;
+				selectOptions[0].selected = true;
+			}
+			//Очистка формы после отправки
+
+			//Событие инпут в поле загрузки картинки
+			imgFileUpload.children[2].addEventListener('input', function (event) {
+				validateInputImgCalc(event.target);
+			});
+			//Событие инпут в поле загрузки картинки
+
+			//Событие submit при отправки формы
+			formCalculation.addEventListener('submit', function (event) {
+				event.preventDefault();
+				if (selectSize.options[selectSize.selectedIndex].value == 0 || selectMaterial.options[selectMaterial.selectedIndex].value == 0 || imgFileUpload.children[2].value == '') {
+					validateInputImgCalc(imgFileUpload.children[2]);
+					validateSelectSize(selectSize);
+					validateSelectMateriale(selectMaterial);
+				} else {
+					sendingForms(event.target);
+				}
+			});
+			//Событие submit при отправки формы
+
+		//Форма с калькулятором =======================================
+
+	//Калькулятор ==================================================================
+
+
+	//Форма с консультацией художника ==============================================
+
+		let formFooter = document.querySelector('.form-footer'),
+				inputFormFooter = formFooter.querySelectorAll('input'),
+				inputFormFooterWrapper = document.querySelector('.input-wrapper');
+
+			//Валидация имени пользователя
+			let mesStatusNameFooter = document.createElement('div');
+					inputFormFooterWrapper.appendChild(mesStatusNameFooter);
+					inputFormFooterWrapper.insertBefore(mesStatusNameFooter, inputFormFooter[1]);
+
+			function validateInputNameFooter(t) {
+				if (t.value.length < 3) {
+					mesStatusNameFooter.classList.remove('validate');
+					mesStatusNameFooter.classList.remove('validate-input_position__name');
+					mesStatusNameFooter.classList.add('novalidate');
+					mesStatusNameFooter.classList.add('novalidate-input_position__name');
+					mesStatusNameFooter.innerHTML = 'Имя должно быть не менее 3 букв';
+				} else {
+					mesStatusNameFooter.classList.remove('novalidate');
+					mesStatusNameFooter.classList.remove('novalidate-input_position__name');
+					mesStatusNameFooter.classList.add('validate');
+					mesStatusNameFooter.classList.add('validate-input_position__name');
+					mesStatusNameFooter.innerHTML = 'Готово';
+				}
+			}
+			//Валидация имени пользователя
+
+			//Валидация номера телефона
+			let mesStatusPhoneFooter = document.createElement('div');
+					inputFormFooterWrapper.appendChild(mesStatusPhoneFooter);
+					inputFormFooterWrapper.insertBefore(mesStatusPhoneFooter, inputFormFooter[2]);
+
+			function validateInputPhoneFooter(t) {
+				if (t.value.lastIndexOf('_') != -1 || t.value == '') {
+					mesStatusPhoneFooter.classList.remove('validate');
+					mesStatusPhoneFooter.classList.remove('validate-input_position__phone');
+					mesStatusPhoneFooter.classList.add('novalidate');
+					mesStatusPhoneFooter.classList.add('novalidate-input_position__phone');
+					mesStatusPhoneFooter.innerHTML = 'Заполните маску номера телефона';
+				} else {
+					mesStatusPhoneFooter.classList.remove('novalidate');
+					mesStatusPhoneFooter.classList.remove('novalidate-input_position__phone');
+					mesStatusPhoneFooter.classList.add('validate');
+					mesStatusPhoneFooter.classList.add('validate-input_position__phone');
+					mesStatusPhoneFooter.innerHTML = 'Готово';
+				}
+			}
+			//Валидация номера телефона
+
+
+			//Валидация почты
+			let mesStatusMailFooter = document.createElement('div');
+					inputFormFooterWrapper.appendChild(mesStatusMailFooter);
+					inputFormFooterWrapper.insertBefore(mesStatusMailFooter, inputFormFooter[3]);
+
+			function validateInputMailFooter(t) {
+				let pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+				if (!pattern.test(t.value)) {
+					mesStatusMailFooter.classList.remove('validate');
+					mesStatusMailFooter.classList.remove('validate-input_position__mail');
+					mesStatusMailFooter.classList.add('novalidate');
+					mesStatusMailFooter.classList.add('novalidate-input_position__mail');
+					mesStatusMailFooter.innerHTML = 'Введите корректный почтовый адрес';
+				} else {
+					mesStatusMailFooter.classList.remove('novalidate');
+					mesStatusMailFooter.classList.remove('novalidate-input_position__mail');
+					mesStatusMailFooter.classList.add('validate');
+					mesStatusMailFooter.classList.add('validate-input_position__mail');
+					mesStatusMailFooter.innerHTML = 'Готово';
+				}
+			}
+			//Валидация почты
+
+			//Очистка формы после отправки
+			function clearFormFooter() {
+				mesStatusNameFooter.classList.remove('validate');
+				mesStatusPhoneFooter.classList.remove('validate');
+				mesStatusMailFooter.classList.remove('validate');
+				mesStatusNameFooter.innerHTML = '';
+				mesStatusPhoneFooter.innerHTML = '';
+				mesStatusMailFooter.innerHTML = '';
+			}
+			//Очистка формы после отправки
+
+			//Событие submit при отправки формы
+			formFooter.addEventListener('submit', function (event) {
+				event.preventDefault();
+				if (inputFormFooter[0].value.length < 3 || inputFormFooter[1].value.lastIndexOf('_') != -1 || !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(inputFormFooter[2].value)) {
+					validateInputNameFooter(inputFormFooter[0]);
+					validateInputPhoneFooter(inputFormFooter[1]);
+					validateInputMailFooter(inputFormFooter[2]);
+				} else {
+					sendingForms(event.target);
+				}
+			});
+			//Событие submit при отправки формы
+
+			//Событие инпут поля имени
+			inputFormFooter[0].addEventListener('input', function (event) {
+				validateInputNameFooter(event.target);
+			});
+			inputFormFooter[0].onkeypress = (event) => {
+				let pattern = /[^а-яА-я]/ig;
+				if (pattern.test(event.key)) {
+					return false;
+				}
+			};
+			//Событие инпут поля имени
+
+			//Событие интуп поля номера телефона
+			inputFormFooter[1].addEventListener('input', function (event) {
+				maskInput(event.target);
+				validateInputPhoneFooter(event.target);
+			});
+			//Событие интуп поля номера телефона
+
+			//Событие интуп поля с почтой
+			inputFormFooter[2].addEventListener('input', function (event) {
+				validateInputMailFooter(event.target);
+			});
+			//Событие интуп поля с почтой
+
+			//Валидация комментария
+			inputFormFooter[3].onkeypress = (event) => {
+				let pattern = /[^а-яА-я]/ig;
+				if (pattern.test(event.key)) {
+					return false;
+				}
+			};
+			//Валидация комментария
+
+
+	//Форма с консультацией художника ==============================================
+
+
+
+	//Фильтр элементов =============================================================
+
+		let menuWrapper = document.querySelector('.portfolio-menu'),
+				filters = menuWrapper.querySelectorAll('li'),
+				filterContent = document.querySelectorAll('.portfolio-block'),
+				portfolioNun = document.querySelector('.portfolio-no');
+
+		let hidemenuContent = (a) => {
+			for (let i = a; i < filters.length; i++) {
+				filters[i].classList.remove('active');
+			}
+		};
+
+		menuWrapper.addEventListener('click', function (event) {
+			let target = event.target;
+			if(target && target.tagName == 'LI') {
+				for (let i = 0; i < filters.length; i++) {
+					if(filters[i] == target) {
+						hidemenuContent(0);
+						filters[i].classList.add('active');
+						if (filters[i].classList[0].indexOf('grandmother') != -1 || filters[i].classList[0].indexOf('granddad') != -1) {
+							portfolioNun.style.display = 'block';
+						} else {
+							portfolioNun.style.display = 'none';
+						}
+						for (let j = 0; j < filterContent.length; j++) {
+							if (filterContent[j].classList.value.indexOf(filters[i].classList[0]) != -1) {
+								filterContent[j].style.display = 'block';
+							} else {
+								filterContent[j].style.display = 'none';
+							}
+						}
+					}
+				}
+			}
+		});
+
+
+	//Фильтр элементов =============================================================
+
+
+	//Аккордеон ====================================================================
+
+		let accordionWrapper = document.querySelector('#accordion'),
+				accordionItems = accordionWrapper.querySelectorAll('.accordion-heading'),
+				accordionContent = accordionWrapper.querySelectorAll('.accordion-block');
+
+				function hideAccordionContent(a) {
+					for (let i = a; i < accordionContent.length; i++) {
+						accordionContent[i].style.display = 'none';
+					}
+				}
+
+				hideAccordionContent(0);
+
+				function passiveAccordionItems(b) {
+					for (let i = b; i < accordionItems.length; i++) {
+						accordionItems[i].classList.remove('active-accordion');
+					}
+				}
+
+				passiveAccordionItems(0);
+
+				accordionWrapper.addEventListener('click', function (event) {
+					let target = event.target;
+					if (!target.classList.contains('accordion-heading')) {
+						target = target.parentNode;
+					}
+					if (target && target.classList.contains('active-accordion')) {
+							passiveAccordionItems(0);
+							hideAccordionContent(0);
+							accordionItems[i].classList.remove('active-accordion');
+					} else if (target && target.classList.contains('accordion-heading')) {
+						for (let i = 0; i < accordionItems.length; i++) {
+							if (target == accordionItems[i]) {
+								passiveAccordionItems(0);
+								hideAccordionContent(0);
+								accordionItems[i].classList.add('active-accordion');
+								accordionContent[i].classList.add('fadeInDown');
+								accordionContent[i].style.cssText = 'animation-duration: 1s';
+								accordionContent[i].style.display = 'block';
+							}
+						}
+					}
+				});
+
+	//Аккордеон ====================================================================
 
 
 	//Подгружаемая информация при клике на кнопку "Посмотреть больше стилей" =======
@@ -696,6 +1129,44 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	//Слайдер с отзывами ===========================================================
 
+	
+	//Отображение меню гамбургера ==================================================
+	
+		let btnBurger = document.querySelector('.burger'),
+				menuBurger = document.querySelector('.burger-menu');
+
+				function activeMenuBurger() {
+					btnBurger.classList.remove('btn_passive');
+					btnBurger.classList.add('btn_active');
+					menuBurger.style.display = 'block';
+				}
+
+				function passiveMenuBurger() {
+					btnBurger.classList.remove('btn_active');
+					btnBurger.classList.add('btn_passive');
+					menuBurger.style.display = 'none';
+				}
+
+				passiveMenuBurger();
+
+				btnBurger.addEventListener('click', (event) => {
+					
+					if (document.documentElement.clientWidth <= 991) {
+						let target = event.target;
+
+								while(target != btnBurger) {
+									target = target.parentNode;
+								}
+						if (target && target.classList.contains('btn_passive')) {
+							activeMenuBurger();
+						} else if (target && target.classList.contains('btn_active')) {
+							passiveMenuBurger();
+						}
+					}
+
+				});
+	
+	//Отображение меню гамбургера ==================================================
 
 
 });
