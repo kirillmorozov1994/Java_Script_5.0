@@ -1,52 +1,4 @@
-window.addEventListener('DOMContentLoaded', function () {
-	'use strick';
-
-
-	//Слайдер главного экрана =========================================
-
-		let mainSlideItems = document.querySelectorAll('.main-slider-item'),
-				slideIndex = 0,
-				tracking = 0;
-
-				function showSlideMain() {
-
-					if (slideIndex == 1) {
-						slideIndex = 0;
-						mainSlideItems[slideIndex + 1].style.cssText = 'display: none';
-						mainSlideItems[slideIndex].style.cssText = 'display: block';
-						mainSlideItems[slideIndex].style.cssText = 'animation-duration: 1.5s';
-					} else if (slideIndex == 0) {
-						slideIndex = 1;
-						mainSlideItems[slideIndex - 1].style.cssText = 'display: none';
-						mainSlideItems[slideIndex].style.cssText = 'display: block';
-						mainSlideItems[slideIndex].style.cssText = 'animation-duration: 1.5s';
-					}
-
-				}
-
-				function currentSlide(n) {
-					if(n == 0) {
-						mainSlideItems.forEach((item) => item.classList.add('slideInDown'));
-						mainSlideItems[n].style.cssText = 'animation-duration: 1.5s';
-						mainSlideItems[n + 1].style.cssText = 'display: none';
-						slideIndex = 0;
-					}
-					if(n == 1) {
-						mainSlideItems.forEach((item) => item.classList.add('slideInDown'));
-						mainSlideItems[n].style.cssText = 'animation-duration: 1.5s';
-						mainSlideItems[n - 1].style.cssText = 'display: none';
-						slideIndex = 1;
-					}
-
-				}
-				currentSlide(0);
-
-				setInterval(showSlideMain, 3000);
-
-	//Слайдер главного экрана ==================================================
-
-
-
+function modalForms() {
 
 	//Модальное окно design ====================================================
 
@@ -76,14 +28,14 @@ window.addEventListener('DOMContentLoaded', function () {
 					clearFormFooter();
 				}
 		
-				document.body.addEventListener('click', function (event) {
+				document.body.addEventListener('click',  (event) => {
 					if(event.target && event.target.classList.contains('button-design')) {
 						showPopupDesign();
 						tracking++;
 					}
 				});
 
-				popupDesign.addEventListener('click', function (event) {
+				popupDesign.addEventListener('click', (event) => {
 					if(event.target.classList.contains('popup-design') || event.target.classList.contains('popup-close')) {
 						closePopupDesign();
 					}
@@ -105,22 +57,23 @@ window.addEventListener('DOMContentLoaded', function () {
 				function closePopupConsultation() {
 					popupConsultation.classList.remove('fadeInRight');
 					popupConsultation.style.display = 'none';
-					clearInputs();
 					inputFormsformsConsultation[0].style.marginBottom = '15px';
 					inputFormsformsConsultation[1].style.marginBottom = '15px';
 					mesStatusNameCons.innerHTML = '';
 					mesStatusPhoneCons.innerHTML = '';
+					clearInputs();
 					clearFormCalculation();
 					clearFormFooter();
 				}
-				document.body.addEventListener('click', function (event) {
+
+				document.body.addEventListener('click', (event) => {
 					if (event.target && event.target.classList.contains('button-consultation')) {
 						showPopupConsultation();
 						tracking++;
 					}
 				});
 
-				popupConsultation.addEventListener('click', function (event) {
+				popupConsultation.addEventListener('click', (event) => {
 					if (event.target.classList.contains('popup-close') || event.target.classList.contains('popup-consultation')) {
 						closePopupConsultation();
 					}
@@ -145,12 +98,12 @@ window.addEventListener('DOMContentLoaded', function () {
 					popupGift.style.display = 'none';
 				}
 		
-				btnPopupGift.addEventListener('click', function () {
+				btnPopupGift.addEventListener('click', () => {
 					showPopupGift();
 					tracking++;
 				});
 
-				popupGift.addEventListener('click', function (event) {
+				popupGift.addEventListener('click', (event) => {
 					if (event.target.classList.contains('popup-close') || event.target.classList.contains('popup-gift')) {
 						closePopupGift();
 					}
@@ -161,7 +114,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	//Появление модального окна consultation через 1 минуту ========================
 
-				setTimeout(function () {
+				setTimeout( () => {
 					if (getComputedStyle(popupGift).display == 'none' && getComputedStyle(popupConsultation).display == 'none' && getComputedStyle(popupDesign).display == 'none') {
 						showPopupConsultation();
 					}
@@ -172,7 +125,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	//Появление модального окна, если не нажата ни одна кнопка =====================
 
-				window.addEventListener('scroll', function () {
+				window.addEventListener('scroll', () => {
 					if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight && getComputedStyle(popupGift).display == 'none' && getComputedStyle(popupConsultation).display == 'none' && getComputedStyle(popupDesign).display == 'none' && tracking == 0) {
 						showPopupGift();
 						tracking++;
@@ -283,6 +236,7 @@ window.addEventListener('DOMContentLoaded', function () {
 							}
 							setCursorPosition(i, a);
 						}
+
 						//Функция определения позиции курсора в поле ввода
 						function setCursorPosition(pos, elem) {
 							if (pos == 15) {
@@ -334,7 +288,7 @@ window.addEventListener('DOMContentLoaded', function () {
 							let formData_1 = new FormData(t),
 								obj_1 = {};
 
-							formData_1.forEach(function (value, key) {
+							formData_1.forEach((value, key) => {
 								obj_1[key] = value;
 							});
 
@@ -342,7 +296,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 							request.send(json);
 
-							request.addEventListener('readystatechange', function () {
+							request.addEventListener('readystatechange', () => {
 								t.appendChild(messageStatus);
 								if (request.readyState < 4) {
 									messageStatus.innerHTML = `<img src="${message.loadind}" /> <h4>Идёт загрузка ...</h4>`;
@@ -380,7 +334,7 @@ window.addEventListener('DOMContentLoaded', function () {
 						}
 
 						//Событие submit при отправки формы
-						formsDesign.addEventListener('submit', function (event) {
+						formsDesign.addEventListener('submit', (event) => {
 							event.preventDefault();
 							if (fileImg.children[2].value == "" || inputFormsDesign[1].value.length < 3 || inputFormsDesign[2].value.lastIndexOf('_') != -1 || !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(inputFormsDesign[3].value)) {
 								validateInputImg(inputFormsDesign[0]);
@@ -394,13 +348,13 @@ window.addEventListener('DOMContentLoaded', function () {
 						//Событие submit при отправки формы
 
 						//Событие инпут в поле загрузки картинки
-						inputFormsDesign[0].addEventListener('input', function (event) {
+						inputFormsDesign[0].addEventListener('input', (event) => {
 							validateInputImg(event.target);
 						});
 						//Событие инпут в поле загрузки картинки
 
 						//Событие инпут поля имени
-						inputFormsDesign[1].addEventListener('input', function (event) {
+						inputFormsDesign[1].addEventListener('input', (event) => {
 							validateInputName(event.target);
 						});
 						inputFormsDesign[1].onkeypress = (event) => {
@@ -412,14 +366,14 @@ window.addEventListener('DOMContentLoaded', function () {
 						//Событие инпут поля имени
 
 						//Событие интуп поля номера телефона
-						inputFormsDesign[2].addEventListener('input', function (event) {
+						inputFormsDesign[2].addEventListener('input', (event) => {
 							maskInput(event.target);
 							validateInputPhone(event.target);
 						});
 						//Событие интуп поля номера телефона
 
 						//Событие интуп поля с почтой
-						inputFormsDesign[3].addEventListener('input', function (event) {
+						inputFormsDesign[3].addEventListener('input', (event) => {
 							validateInputMail(event.target);
 						});
 						//Событие интуп поля с почтой
@@ -485,7 +439,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Валидация номера телефона
 
 			//Событие submit при отправки формы
-			formsConsultation.addEventListener('submit', function (event) {
+			formsConsultation.addEventListener('submit', (event) => {
 				event.preventDefault();
 				if (inputFormsformsConsultation[0].value.length < 3 || inputFormsformsConsultation[1].value.lastIndexOf('_') != -1) {
 					validateInputNameCons(inputFormsformsConsultation[0]);
@@ -497,7 +451,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие submit при отправки формы
 
 			//Событие инпут поля имени
-			inputFormsformsConsultation[0].addEventListener('input', function (event) {
+			inputFormsformsConsultation[0].addEventListener('input', (event) => {
 				validateInputNameCons(event.target);
 			});
 			inputFormsformsConsultation[0].onkeypress = (event) => {
@@ -509,7 +463,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие инпут поля имени
 
 			//Событие интуп поля номера телефона
-			inputFormsformsConsultation[1].addEventListener('input', function (event) {
+			inputFormsformsConsultation[1].addEventListener('input', (event) => {
 				maskInput(event.target);
 				validateInputPhoneCons(event.target);
 			});
@@ -518,7 +472,6 @@ window.addEventListener('DOMContentLoaded', function () {
 		//Форма "Остались вопросы" =======================================
 
 	//Формы отправки ===============================================================
-
 
 	//Калькулятор ==================================================================
 
@@ -614,75 +567,75 @@ window.addEventListener('DOMContentLoaded', function () {
 						}
 				}
 
-				selectSize.addEventListener('change', function (event) {
+				selectSize.addEventListener('change', (event) => {
 					validateSelectSize(event.target);
 				});
 
-				selectMaterial.addEventListener('change', function (event) {
+				selectMaterial.addEventListener('change', (event) => {
 					validateSelectMateriale(event.target);
 				});
 
-				selectOptions.addEventListener('change', function (event) {
+				selectOptions.addEventListener('change', (event) => {
 					validateSelectOptions(event.target);
 				});
 
-				inputPromoCode.addEventListener('input', function (event) {
+				inputPromoCode.addEventListener('input', (event) => {
 					validatePromoCode(event.target);
 				});
 
-		//Форма с калькулятором =======================================
-			
-			let formCalculation = document.querySelector('.form-calc');
- 
-			//Валидация загрузки изображения
-			function validateInputImgCalc(t) {
-				if (!t.value == "") {
-					imgFileUpload.children[1].classList.remove('novalidate');
-					imgFileUpload.children[1].classList.add('validate');
-					imgFileUpload.children[1].innerText = 'Файл загружен';
-				} else {
-					imgFileUpload.children[1].classList.remove('validate');
-					imgFileUpload.children[1].classList.add('novalidate');
-				}
-			}
-			//Валидация загрузки изображения
+		//Калькулятор =================================================
 
-			//Очистка формы после отправки
-			function clearFormCalculation() {
-				imgFileUpload.children[1].classList.remove('validate');
+		//Форма с калькулятором =======================================
+
+		let formCalculation = document.querySelector('.form-calc');
+
+		//Валидация загрузки изображения
+		function validateInputImgCalc(t) {
+			if (!t.value == "") {
 				imgFileUpload.children[1].classList.remove('novalidate');
-				imgFileUpload.children[1].innerText = 'Файл не выбран';
-				calcPrice.classList.remove('validate');
-				calcPrice.classList.remove('novalidate');
-				calcPrice.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
-				selectSize[0].selected = true;
-				selectMaterial[0].selected = true;
-				selectOptions[0].selected = true;
+				imgFileUpload.children[1].classList.add('validate');
+				imgFileUpload.children[1].innerText = 'Файл загружен';
+			} else {
+				imgFileUpload.children[1].classList.remove('validate');
+				imgFileUpload.children[1].classList.add('novalidate');
 			}
-			//Очистка формы после отправки
+		}
+		//Валидация загрузки изображения
 
-			//Событие инпут в поле загрузки картинки
-			imgFileUpload.children[2].addEventListener('input', function (event) {
-				validateInputImgCalc(event.target);
-			});
-			//Событие инпут в поле загрузки картинки
+		//Очистка формы после отправки
+		function clearFormCalculation() {
+			imgFileUpload.children[1].classList.remove('validate');
+			imgFileUpload.children[1].classList.remove('novalidate');
+			imgFileUpload.children[1].innerText = 'Файл не выбран';
+			calcPrice.classList.remove('validate');
+			calcPrice.classList.remove('novalidate');
+			calcPrice.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+			selectSize[0].selected = true;
+			selectMaterial[0].selected = true;
+			selectOptions[0].selected = true;
+		}
+		//Очистка формы после отправки
 
-			//Событие submit при отправки формы
-			formCalculation.addEventListener('submit', function (event) {
-				event.preventDefault();
-				if (selectSize.options[selectSize.selectedIndex].value == 0 || selectMaterial.options[selectMaterial.selectedIndex].value == 0 || imgFileUpload.children[2].value == '') {
-					validateInputImgCalc(imgFileUpload.children[2]);
-					validateSelectSize(selectSize);
-					validateSelectMateriale(selectMaterial);
-				} else {
-					sendingForms(event.target);
-				}
-			});
-			//Событие submit при отправки формы
+		//Событие инпут в поле загрузки картинки
+		imgFileUpload.children[2].addEventListener('input', (event) => {
+			validateInputImgCalc(event.target);
+		});
+		//Событие инпут в поле загрузки картинки
 
-		//Форма с калькулятором =======================================
+		//Событие submit при отправки формы
+		formCalculation.addEventListener('submit', (event) => {
+			event.preventDefault();
+			if (selectSize.options[selectSize.selectedIndex].value == 0 || selectMaterial.options[selectMaterial.selectedIndex].value == 0 || imgFileUpload.children[2].value == '') {
+				validateInputImgCalc(imgFileUpload.children[2]);
+				validateSelectSize(selectSize);
+				validateSelectMateriale(selectMaterial);
+			} else {
+				sendingForms(event.target);
+			}
+		});
+		//Событие submit при отправки формы
 
-	//Калькулятор ==================================================================
+		//Форма с калькулятором ======================================================
 
 
 	//Форма с консультацией художника ==============================================
@@ -771,7 +724,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Очистка формы после отправки
 
 			//Событие submit при отправки формы
-			formFooter.addEventListener('submit', function (event) {
+			formFooter.addEventListener('submit', (event) => {
 				event.preventDefault();
 				if (inputFormFooter[0].value.length < 3 || inputFormFooter[1].value.lastIndexOf('_') != -1 || !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(inputFormFooter[2].value)) {
 					validateInputNameFooter(inputFormFooter[0]);
@@ -784,7 +737,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие submit при отправки формы
 
 			//Событие инпут поля имени
-			inputFormFooter[0].addEventListener('input', function (event) {
+			inputFormFooter[0].addEventListener('input', (event) => {
 				validateInputNameFooter(event.target);
 			});
 			inputFormFooter[0].onkeypress = (event) => {
@@ -796,14 +749,14 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие инпут поля имени
 
 			//Событие интуп поля номера телефона
-			inputFormFooter[1].addEventListener('input', function (event) {
+			inputFormFooter[1].addEventListener('input', (event) => {
 				maskInput(event.target);
 				validateInputPhoneFooter(event.target);
 			});
 			//Событие интуп поля номера телефона
 
 			//Событие интуп поля с почтой
-			inputFormFooter[2].addEventListener('input', function (event) {
+			inputFormFooter[2].addEventListener('input', (event) => {
 				validateInputMailFooter(event.target);
 			});
 			//Событие интуп поля с почтой
@@ -820,352 +773,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	//Форма с консультацией художника ==============================================
 
+}
 
-
-	//Фильтр элементов =============================================================
-
-		let menuWrapper = document.querySelector('.portfolio-menu'),
-				filters = menuWrapper.querySelectorAll('li'),
-				filterContent = document.querySelectorAll('.portfolio-block'),
-				portfolioNun = document.querySelector('.portfolio-no');
-
-		let hidemenuContent = (a) => {
-			for (let i = a; i < filters.length; i++) {
-				filters[i].classList.remove('active');
-			}
-		};
-
-		menuWrapper.addEventListener('click', function (event) {
-			let target = event.target;
-			if(target && target.tagName == 'LI') {
-				for (let i = 0; i < filters.length; i++) {
-					if(filters[i] == target) {
-						hidemenuContent(0);
-						filters[i].classList.add('active');
-						if (filters[i].classList[0].indexOf('grandmother') != -1 || filters[i].classList[0].indexOf('granddad') != -1) {
-							portfolioNun.style.display = 'block';
-						} else {
-							portfolioNun.style.display = 'none';
-						}
-						for (let j = 0; j < filterContent.length; j++) {
-							if (filterContent[j].classList.value.indexOf(filters[i].classList[0]) != -1) {
-								filterContent[j].style.display = 'block';
-							} else {
-								filterContent[j].style.display = 'none';
-							}
-						}
-					}
-				}
-			}
-		});
-
-
-	//Фильтр элементов =============================================================
-
-
-	//Аккордеон ====================================================================
-
-		let accordionWrapper = document.querySelector('#accordion'),
-				accordionItems = accordionWrapper.querySelectorAll('.accordion-heading'),
-				accordionContent = accordionWrapper.querySelectorAll('.accordion-block');
-
-				function hideAccordionContent(a) {
-					for (let i = a; i < accordionContent.length; i++) {
-						accordionContent[i].style.display = 'none';
-					}
-				}
-
-				hideAccordionContent(0);
-
-				function passiveAccordionItems(b) {
-					for (let i = b; i < accordionItems.length; i++) {
-						accordionItems[i].classList.remove('active-accordion');
-					}
-				}
-
-				passiveAccordionItems(0);
-
-				accordionWrapper.addEventListener('click', function (event) {
-					let target = event.target;
-					if (!target.classList.contains('accordion-heading')) {
-						target = target.parentNode;
-					}
-					if (target && target.classList.contains('active-accordion')) {
-							passiveAccordionItems(0);
-							hideAccordionContent(0);
-					} else if (target && target.classList.contains('accordion-heading')) {
-						for (let i = 0; i < accordionItems.length; i++) {
-							if (target == accordionItems[i]) {
-								passiveAccordionItems(0);
-								hideAccordionContent(0);
-								accordionItems[i].classList.add('active-accordion');
-								accordionContent[i].classList.add('fadeInDown');
-								accordionContent[i].style.cssText = 'animation-duration: 1s';
-								accordionContent[i].style.display = 'block';
-							}
-						}
-					}
-				});
-
-	//Аккордеон ====================================================================
-
-
-	//Подгружаемая информация при клике на кнопку "Посмотреть больше стилей" =======
-
-		let btnMoreStyle = document.querySelector('.button-styles'),
-				contentStyles = document.querySelectorAll('.styles-2');
-
-				btnMoreStyle.addEventListener('click', function () {
-					btnMoreStyle.style.display = 'none';
-					contentStyles.forEach((item) => {
-						if(window.innerWidth >= 768) {
-							item.classList.remove('hidden-lg');
-							item.classList.remove('hidden-md');
-							item.classList.add('fadeInLeft');
-							item.style.cssText = 'animation-duration: 1s';
-						} else {
-							item.classList.remove('hidden-sm');
-							item.classList.remove('hidden-xs');
-						}
-					});
-				});
-
-	//Подгружаемая информация при клике на кнопку "Посмотреть больше стилей" =======
-
-
-	//Наведение на картинки и тач на телефоне ======================================
-	
-		let imgWrapper = document.querySelector('.sizes-wrapper'),
-				sizeBlocks = document.querySelectorAll('.sizes-block');
-
-				imgWrapper.addEventListener('mouseover', function (event) {
-					showImgSize(event.target);
-				});
-
-				imgWrapper.addEventListener('mouseout', function (event) {
-					hideImgSize(event.target);
-				});
-
-				document.body.addEventListener('touchstart', function () {
-					if (event.target && !event.target.classList.contains('sizes-block') && !event.target.classList.contains('size') && !event.target.classList.contains('starting-price') && !event.target.classList.contains('final-price') && !event.target.classList.contains('size-1') && !event.target.classList.contains('size-2') && !event.target.classList.contains('size-3') && !event.target.classList.contains('size-4')) {
-						for(let i = 0; i < 4; i++) {
-							if(i == 0) {
-								showContent(sizeBlocks[i]);
-								sizeBlocks[i].children[0].setAttribute('src', 'img/sizes-1.png');
-							}
-							if(i == 1) {
-								showContent(sizeBlocks[i]);
-								sizeBlocks[i].children[0].setAttribute('src', 'img/sizes-2.png');
-							}
-							if(i == 2) {
-								showContent(sizeBlocks[i]);
-								sizeBlocks[i].children[0].setAttribute('src', 'img/sizes-3.png');
-							}
-							if(i == 3) {
-								showContent(sizeBlocks[i]);
-								sizeBlocks[i].children[0].setAttribute('src', 'img/sizes-4.png');
-							}
-						}
-					} else {
-						tabsPhone(event.target);
-					}
-				});
-
-
-				function hideContent(n) {
-					n.children[0].style.cssText = 'z-index: 10';
-					n.children[1].style.cssText = 'z-index: -1';
-					n.children[2].style.cssText = 'z-index: -1';
-					n.children[3].style.cssText = 'z-index: -1';
-				}
-
-				function showContent(n) {
-					n.children[0].style.cssText = 'z-index: -1';
-					n.children[1].style.cssText = 'z-index: 10';
-					n.children[2].style.cssText = 'z-index: 10';
-					n.children[3].style.cssText = 'z-index: 10';
-				}
-
-				function showImgSize(t) {
-					if (!t.classList.contains('sizes-wrapper')) {
-						while (!t.classList.contains('sizes-block')) {
-							t = t.parentNode;
-						}
-					} else {
-						return false;
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-1.png') {
-						hideContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-1-1.png');
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-2.png') {
-						hideContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-2-1.png');
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-3.png') {
-						hideContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-3-1.png');
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-4.png') {
-						hideContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-4-1.png');
-					}
-				}
-
-				function hideImgSize(t) {
-					if (!t.classList.contains('sizes-wrapper')) {
-						while (!t.classList.contains('sizes-block')) {
-							t = t.parentNode;
-						}
-					} else {
-						return false;
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-1-1.png') {
-						showContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-1.png');
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-2-1.png') {
-						showContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-2.png');
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-3-1.png') {
-						showContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-3.png');
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-4-1.png') {
-						showContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-4.png');
-					}
-				}
-
-				function tabsPhone(t) {
-					if(!t.classList.contains('sizes-wrapper')) {
-						while (!t.classList.contains('sizes-block')) {
-							t = t.parentNode;
-						}
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-1.png') {
-						hideContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-1-1.png');
-					}
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-2.png') {
-						hideContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-2-1.png');
-					} 
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-3.png') {
-						hideContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-3-1.png');
-					} 
-					if (t && t.children[0].getAttribute('src') == 'img/sizes-4.png') {
-						hideContent(t);
-						t.children[0].setAttribute('src', 'img/sizes-4-1.png');
-					}
-				}
-	
-	//Наведение на картинки и тач на телефоне ======================================
-
-	//Слайдер с отзывами ===========================================================
-		
-		let slideNumber = 1,
-				slidesItems = document.querySelectorAll('.feedback-slider-item'),
-				prev = document.querySelector('.main-prev-btn'),
-				next = document.querySelector('.main-next-btn');
-
-				let id = setInterval(function () {
-					incrSlides(1);
-				}, 5000);
-
-				animateSliderNext(slideNumber);
-
-				function incrSlides(n) {
-					if (n == -1) {
-						animateSliderPrev(slideNumber += n);
-					} else {
-						animateSliderNext(slideNumber += n);
-					}
-				}
-
-				prev.addEventListener('click', function () {
-					incrSlides(-1);
-				});
-				next.addEventListener('click', function () {
-					incrSlides(1);
-				});
-
-				function animateSliderPrev(n) {
-
-					if (n > slidesItems.length) {
-						slideNumber = 1;
-					}
-					if (n < 1) {
-						slideNumber = slidesItems.length;
-					}
-
-					slidesItems.forEach((item) => item.style.display = 'none');
-					slidesItems[slideNumber - 1].classList.remove('fadeInLeft');
-					slidesItems[slideNumber - 1].classList.add('fadeInRight');
-					slidesItems[slideNumber - 1].style.cssText = 'animation-duration: 1s';
-					slidesItems[slideNumber - 1].style.display = 'block';
-
-				}
-
-				function animateSliderNext(n) {
-					if (n > slidesItems.length) {
-						slideNumber = 1;
-					}
-					if (n < 1) {
-						slideNumber = slidesItems.length;
-					}
-
-					slidesItems.forEach((item) => item.style.display = 'none');
-					slidesItems[slideNumber - 1].classList.remove('fadeInRight');
-					slidesItems[slideNumber - 1].classList.add('fadeInLeft');
-					slidesItems[slideNumber - 1].style.cssText = 'animation-duration: 1s';
-					slidesItems[slideNumber - 1].style.display = 'block';
-
-				}
-
-
-	//Слайдер с отзывами ===========================================================
-
-	
-	//Отображение меню гамбургера ==================================================
-	
-		let btnBurger = document.querySelector('.burger'),
-				menuBurger = document.querySelector('.burger-menu');
-
-				function activeMenuBurger() {
-					btnBurger.classList.remove('btn_passive');
-					btnBurger.classList.add('btn_active');
-					menuBurger.style.display = 'block';
-				}
-
-				function passiveMenuBurger() {
-					btnBurger.classList.remove('btn_active');
-					btnBurger.classList.add('btn_passive');
-					menuBurger.style.display = 'none';
-				}
-
-				passiveMenuBurger();
-
-				btnBurger.addEventListener('click', (event) => {
-					
-					if (document.documentElement.clientWidth <= 991) {
-						let target = event.target;
-
-								while(target != btnBurger) {
-									target = target.parentNode;
-								}
-						if (target && target.classList.contains('btn_passive')) {
-							activeMenuBurger();
-						} else if (target && target.classList.contains('btn_active')) {
-							passiveMenuBurger();
-						}
-					}
-
-				});
-	
-	//Отображение меню гамбургера ==================================================
-
-
-});
+module.exports = modalForms;

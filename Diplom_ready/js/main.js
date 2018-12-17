@@ -76,14 +76,14 @@ window.addEventListener('DOMContentLoaded', function () {
 					clearFormFooter();
 				}
 		
-				document.body.addEventListener('click', function (event) {
+				document.body.addEventListener('click',  (event) => {
 					if(event.target && event.target.classList.contains('button-design')) {
 						showPopupDesign();
 						tracking++;
 					}
 				});
 
-				popupDesign.addEventListener('click', function (event) {
+				popupDesign.addEventListener('click', (event) => {
 					if(event.target.classList.contains('popup-design') || event.target.classList.contains('popup-close')) {
 						closePopupDesign();
 					}
@@ -105,22 +105,23 @@ window.addEventListener('DOMContentLoaded', function () {
 				function closePopupConsultation() {
 					popupConsultation.classList.remove('fadeInRight');
 					popupConsultation.style.display = 'none';
-					clearInputs();
 					inputFormsformsConsultation[0].style.marginBottom = '15px';
 					inputFormsformsConsultation[1].style.marginBottom = '15px';
 					mesStatusNameCons.innerHTML = '';
 					mesStatusPhoneCons.innerHTML = '';
+					clearInputs();
 					clearFormCalculation();
 					clearFormFooter();
 				}
-				document.body.addEventListener('click', function (event) {
+
+				document.body.addEventListener('click', (event) => {
 					if (event.target && event.target.classList.contains('button-consultation')) {
 						showPopupConsultation();
 						tracking++;
 					}
 				});
 
-				popupConsultation.addEventListener('click', function (event) {
+				popupConsultation.addEventListener('click', (event) => {
 					if (event.target.classList.contains('popup-close') || event.target.classList.contains('popup-consultation')) {
 						closePopupConsultation();
 					}
@@ -145,12 +146,12 @@ window.addEventListener('DOMContentLoaded', function () {
 					popupGift.style.display = 'none';
 				}
 		
-				btnPopupGift.addEventListener('click', function () {
+				btnPopupGift.addEventListener('click', () => {
 					showPopupGift();
 					tracking++;
 				});
 
-				popupGift.addEventListener('click', function (event) {
+				popupGift.addEventListener('click', (event) => {
 					if (event.target.classList.contains('popup-close') || event.target.classList.contains('popup-gift')) {
 						closePopupGift();
 					}
@@ -161,7 +162,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	//Появление модального окна consultation через 1 минуту ========================
 
-				setTimeout(function () {
+				setTimeout( () => {
 					if (getComputedStyle(popupGift).display == 'none' && getComputedStyle(popupConsultation).display == 'none' && getComputedStyle(popupDesign).display == 'none') {
 						showPopupConsultation();
 					}
@@ -172,7 +173,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	//Появление модального окна, если не нажата ни одна кнопка =====================
 
-				window.addEventListener('scroll', function () {
+				window.addEventListener('scroll', () => {
 					if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight && getComputedStyle(popupGift).display == 'none' && getComputedStyle(popupConsultation).display == 'none' && getComputedStyle(popupDesign).display == 'none' && tracking == 0) {
 						showPopupGift();
 						tracking++;
@@ -283,6 +284,7 @@ window.addEventListener('DOMContentLoaded', function () {
 							}
 							setCursorPosition(i, a);
 						}
+
 						//Функция определения позиции курсора в поле ввода
 						function setCursorPosition(pos, elem) {
 							if (pos == 15) {
@@ -334,7 +336,7 @@ window.addEventListener('DOMContentLoaded', function () {
 							let formData_1 = new FormData(t),
 								obj_1 = {};
 
-							formData_1.forEach(function (value, key) {
+							formData_1.forEach((value, key) => {
 								obj_1[key] = value;
 							});
 
@@ -342,7 +344,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 							request.send(json);
 
-							request.addEventListener('readystatechange', function () {
+							request.addEventListener('readystatechange', () => {
 								t.appendChild(messageStatus);
 								if (request.readyState < 4) {
 									messageStatus.innerHTML = `<img src="${message.loadind}" /> <h4>Идёт загрузка ...</h4>`;
@@ -380,7 +382,7 @@ window.addEventListener('DOMContentLoaded', function () {
 						}
 
 						//Событие submit при отправки формы
-						formsDesign.addEventListener('submit', function (event) {
+						formsDesign.addEventListener('submit', (event) => {
 							event.preventDefault();
 							if (fileImg.children[2].value == "" || inputFormsDesign[1].value.length < 3 || inputFormsDesign[2].value.lastIndexOf('_') != -1 || !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(inputFormsDesign[3].value)) {
 								validateInputImg(inputFormsDesign[0]);
@@ -394,13 +396,13 @@ window.addEventListener('DOMContentLoaded', function () {
 						//Событие submit при отправки формы
 
 						//Событие инпут в поле загрузки картинки
-						inputFormsDesign[0].addEventListener('input', function (event) {
+						inputFormsDesign[0].addEventListener('input', (event) => {
 							validateInputImg(event.target);
 						});
 						//Событие инпут в поле загрузки картинки
 
 						//Событие инпут поля имени
-						inputFormsDesign[1].addEventListener('input', function (event) {
+						inputFormsDesign[1].addEventListener('input', (event) => {
 							validateInputName(event.target);
 						});
 						inputFormsDesign[1].onkeypress = (event) => {
@@ -412,14 +414,14 @@ window.addEventListener('DOMContentLoaded', function () {
 						//Событие инпут поля имени
 
 						//Событие интуп поля номера телефона
-						inputFormsDesign[2].addEventListener('input', function (event) {
+						inputFormsDesign[2].addEventListener('input', (event) => {
 							maskInput(event.target);
 							validateInputPhone(event.target);
 						});
 						//Событие интуп поля номера телефона
 
 						//Событие интуп поля с почтой
-						inputFormsDesign[3].addEventListener('input', function (event) {
+						inputFormsDesign[3].addEventListener('input', (event) => {
 							validateInputMail(event.target);
 						});
 						//Событие интуп поля с почтой
@@ -485,7 +487,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Валидация номера телефона
 
 			//Событие submit при отправки формы
-			formsConsultation.addEventListener('submit', function (event) {
+			formsConsultation.addEventListener('submit', (event) => {
 				event.preventDefault();
 				if (inputFormsformsConsultation[0].value.length < 3 || inputFormsformsConsultation[1].value.lastIndexOf('_') != -1) {
 					validateInputNameCons(inputFormsformsConsultation[0]);
@@ -497,7 +499,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие submit при отправки формы
 
 			//Событие инпут поля имени
-			inputFormsformsConsultation[0].addEventListener('input', function (event) {
+			inputFormsformsConsultation[0].addEventListener('input', (event) => {
 				validateInputNameCons(event.target);
 			});
 			inputFormsformsConsultation[0].onkeypress = (event) => {
@@ -509,7 +511,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие инпут поля имени
 
 			//Событие интуп поля номера телефона
-			inputFormsformsConsultation[1].addEventListener('input', function (event) {
+			inputFormsformsConsultation[1].addEventListener('input', (event) => {
 				maskInput(event.target);
 				validateInputPhoneCons(event.target);
 			});
@@ -614,19 +616,19 @@ window.addEventListener('DOMContentLoaded', function () {
 						}
 				}
 
-				selectSize.addEventListener('change', function (event) {
+				selectSize.addEventListener('change', (event) => {
 					validateSelectSize(event.target);
 				});
 
-				selectMaterial.addEventListener('change', function (event) {
+				selectMaterial.addEventListener('change', (event) => {
 					validateSelectMateriale(event.target);
 				});
 
-				selectOptions.addEventListener('change', function (event) {
+				selectOptions.addEventListener('change', (event) => {
 					validateSelectOptions(event.target);
 				});
 
-				inputPromoCode.addEventListener('input', function (event) {
+				inputPromoCode.addEventListener('input', (event) => {
 					validatePromoCode(event.target);
 				});
 
@@ -662,13 +664,13 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Очистка формы после отправки
 
 			//Событие инпут в поле загрузки картинки
-			imgFileUpload.children[2].addEventListener('input', function (event) {
+			imgFileUpload.children[2].addEventListener('input', (event) => {
 				validateInputImgCalc(event.target);
 			});
 			//Событие инпут в поле загрузки картинки
 
 			//Событие submit при отправки формы
-			formCalculation.addEventListener('submit', function (event) {
+			formCalculation.addEventListener('submit', (event) => {
 				event.preventDefault();
 				if (selectSize.options[selectSize.selectedIndex].value == 0 || selectMaterial.options[selectMaterial.selectedIndex].value == 0 || imgFileUpload.children[2].value == '') {
 					validateInputImgCalc(imgFileUpload.children[2]);
@@ -771,7 +773,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Очистка формы после отправки
 
 			//Событие submit при отправки формы
-			formFooter.addEventListener('submit', function (event) {
+			formFooter.addEventListener('submit', (event) => {
 				event.preventDefault();
 				if (inputFormFooter[0].value.length < 3 || inputFormFooter[1].value.lastIndexOf('_') != -1 || !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(inputFormFooter[2].value)) {
 					validateInputNameFooter(inputFormFooter[0]);
@@ -784,7 +786,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие submit при отправки формы
 
 			//Событие инпут поля имени
-			inputFormFooter[0].addEventListener('input', function (event) {
+			inputFormFooter[0].addEventListener('input', (event) => {
 				validateInputNameFooter(event.target);
 			});
 			inputFormFooter[0].onkeypress = (event) => {
@@ -796,14 +798,14 @@ window.addEventListener('DOMContentLoaded', function () {
 			//Событие инпут поля имени
 
 			//Событие интуп поля номера телефона
-			inputFormFooter[1].addEventListener('input', function (event) {
+			inputFormFooter[1].addEventListener('input', (event) => {
 				maskInput(event.target);
 				validateInputPhoneFooter(event.target);
 			});
 			//Событие интуп поля номера телефона
 
 			//Событие интуп поля с почтой
-			inputFormFooter[2].addEventListener('input', function (event) {
+			inputFormFooter[2].addEventListener('input', (event) => {
 				validateInputMailFooter(event.target);
 			});
 			//Событие интуп поля с почтой
@@ -835,7 +837,7 @@ window.addEventListener('DOMContentLoaded', function () {
 			}
 		};
 
-		menuWrapper.addEventListener('click', function (event) {
+		menuWrapper.addEventListener('click', (event) => {
 			let target = event.target;
 			if(target && target.tagName == 'LI') {
 				for (let i = 0; i < filters.length; i++) {
@@ -885,7 +887,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 				passiveAccordionItems(0);
 
-				accordionWrapper.addEventListener('click', function (event) {
+				accordionWrapper.addEventListener('click', (event) =>{
 					let target = event.target;
 					if (!target.classList.contains('accordion-heading')) {
 						target = target.parentNode;
@@ -915,7 +917,7 @@ window.addEventListener('DOMContentLoaded', function () {
 		let btnMoreStyle = document.querySelector('.button-styles'),
 				contentStyles = document.querySelectorAll('.styles-2');
 
-				btnMoreStyle.addEventListener('click', function () {
+				btnMoreStyle.addEventListener('click', () => {
 					btnMoreStyle.style.display = 'none';
 					contentStyles.forEach((item) => {
 						if(window.innerWidth >= 768) {
@@ -938,15 +940,15 @@ window.addEventListener('DOMContentLoaded', function () {
 		let imgWrapper = document.querySelector('.sizes-wrapper'),
 				sizeBlocks = document.querySelectorAll('.sizes-block');
 
-				imgWrapper.addEventListener('mouseover', function (event) {
+				imgWrapper.addEventListener('mouseover', (event) => {
 					showImgSize(event.target);
 				});
 
-				imgWrapper.addEventListener('mouseout', function (event) {
+				imgWrapper.addEventListener('mouseout', (event) => {
 					hideImgSize(event.target);
 				});
 
-				document.body.addEventListener('touchstart', function () {
+				document.body.addEventListener('touchstart', () => {
 					if (event.target && !event.target.classList.contains('sizes-block') && !event.target.classList.contains('size') && !event.target.classList.contains('starting-price') && !event.target.classList.contains('final-price') && !event.target.classList.contains('size-1') && !event.target.classList.contains('size-2') && !event.target.classList.contains('size-3') && !event.target.classList.contains('size-4')) {
 						for(let i = 0; i < 4; i++) {
 							if(i == 0) {
@@ -1071,7 +1073,7 @@ window.addEventListener('DOMContentLoaded', function () {
 				prev = document.querySelector('.main-prev-btn'),
 				next = document.querySelector('.main-next-btn');
 
-				let id = setInterval(function () {
+				let id = setInterval(() => {
 					incrSlides(1);
 				}, 5000);
 
@@ -1085,10 +1087,10 @@ window.addEventListener('DOMContentLoaded', function () {
 					}
 				}
 
-				prev.addEventListener('click', function () {
+				prev.addEventListener('click', () => {
 					incrSlides(-1);
 				});
-				next.addEventListener('click', function () {
+				next.addEventListener('click', () => {
 					incrSlides(1);
 				});
 
